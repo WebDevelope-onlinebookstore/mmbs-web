@@ -1,0 +1,288 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+}
+
+#container {
+    position: relative;
+    padding: 30px 0 90px;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.mypage .content {
+    float: right;
+    min-height: 800px;
+    margin-top: -25px;
+    width: 941px;
+}
+
+.mypage_txt {
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.mypage p.sub_title {
+    padding-bottom: 34px;
+}
+
+#container p.sub_title {
+    font-size: 18px;
+    color: #000;
+    text-align: center;
+}
+
+.btn_top_area {
+    padding: 0 0 20px 0;
+    text-align: right;
+}
+
+.star {
+    color: #e50433;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1;
+}
+
+input[type="hidden" i] {
+    appearance: none;
+    background-color: initial;
+    cursor: default;
+    display: none !important;
+    padding: initial;
+    border: initial;
+}
+
+body {
+    font-family: NotoSans, Arial, sans-serif;
+    font-size: 15px;
+    color: #4d4d4d;
+}
+
+form {
+    display: block;
+}
+
+table {
+    border-collapse: inherit;
+    border-spacing: 0;
+}
+
+.tbl_write_01 {
+    position: relative;
+    border-top: 1px solid #5e7b71;
+    border-bottom: 1px solid #b8b8b8;
+}
+
+.tbl_write_01 table {
+    width: 100%;
+}
+
+.tbl_write_01 table th {
+    background-color: #f5f5f5;
+}
+
+.tbl_write_01 tbody tr th {
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #e5e5e5;
+    color: #000;
+}
+
+.tbl_write_01 .file_wrap {
+    display: inline-block;
+    position: relative;
+}
+
+.tbl_write_01 input[type=file] {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.tbl_write_01 tbody tr td .info_txt {
+    font-size: 14px;
+    padding-top: 15px;
+    line-height: 18px;
+}
+
+.tbl_write_01 .sch_file {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #6b7078;
+    color: #000;
+    text-align: center;
+    font-size: 13px;
+    height: 33px;
+    line-height: 33px;
+    padding: 0 25px;
+}
+
+.tbl_write_01 tbody tr td {
+    color: #000;
+    font-size: 14px;
+    text-align: left;
+    padding: 12px 24px;
+    position: relative;
+    border-top: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+    line-height: 37px;
+}
+
+.tbl_write_01 textarea {
+    border: 1px solid #dbdbdb;
+    /* padding: 0 10px; */
+    color: #212121;
+    height: 135px;
+    font-size: 14px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.tbl_write_01 input[type=text] {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid #dbdbdb;
+    color: #212121;
+    padding: 0 10px;
+    height: 35px;
+    line-height: 17px;
+    font-size: 14px;
+}
+
+.tbl_write_01 input[type=checkbox], .tbl_write_01 input[type=radio] {
+    vertical-align: middle;
+}
+
+input[type=radio], input[type=checkbox] {
+    cursor: pointer;
+}
+
+input[type="checkbox" i] {
+    background-color: initial;
+    /* cursor: default; */
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: initial;
+}
+
+caption {
+    font-size: 0;
+}
+
+colgroup {
+    display: table-column-group;
+}
+
+col {
+    display: table-column;
+}
+
+input[type=text], input[type=password], select, textarea, button {
+    font-family: NotoSans, Arial, sans-serif;
+}
+
+.w_70 {
+    width: 70px;
+}
+
+select.select_board.w_70 {
+    min-width: auto;
+}
+
+select {
+    -webkit-appearance: none;
+    outline: none;
+}
+
+select:not(:-internal-list-box) {
+    overflow: visible !important;
+}
+
+select.select_board {
+    display: inline-block;
+    vertical-align: middle;
+    color: #212121;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url(/mmbs/ico_down.png);
+    background-repeat: no-repeat;
+    background-position: 95% 50%;
+    border: 0;
+    height: 37px;
+    min-width: 144px;
+    padding-left: 5px;
+    border: 1px solid #dbdbdb;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+.comm_btn_area {
+    text-align: center;
+    padding-top: 60px;
+    font-size: 0;
+}
+
+.comm_btn_area button {
+    display: inline-block;
+    width: 145px;
+    height: 42px;
+    font-size: 13px;
+    line-height: 38px;
+    text-align: center;
+    box-sizing: border-box;
+    margin-right: 7px;
+}
+
+.comm_btn_area a {
+    display: inline-block;
+    width: 145px;
+    height: 42px;
+    font-size: 13px;
+    line-height: 38px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.btn {
+    position: relative;
+    margin: 0;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    overflow: visible;
+    display: inline-block;
+    zoom: 1;
+    white-space: nowrap;
+}
+
+.btn_solid {
+    background-color: #3b3f4a;
+    border: 1px solid #3b3f4a;
+    color: #fff;
+    text-align: center;
+}
+
+button, input[type=button], a {
+    cursor: pointer;
+}
