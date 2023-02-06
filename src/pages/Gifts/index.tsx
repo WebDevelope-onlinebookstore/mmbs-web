@@ -58,7 +58,7 @@ export default function Gifts() {
 
   return (
     <>
-    <Box mr={60} ml={60}>
+    <Box>
         <Accordion >
             <Box padding={1} >
                 <AccordionSummary

@@ -44,7 +44,9 @@ export default function PayPage() {
                   <Typography padding={1}>{product.productTitle}</Typography>
                   <Typography padding={1}>{product.productPrice}</Typography>
                   <Typography padding={1}>{product.count}</Typography>
-                  <Typography padding={1}>{product.count * product.productPrice}</Typography>
+                  <Typography padding={1}>
+                    {product.count * product.productPrice}
+                  </Typography>
                 </Box>
                 <Box
                   display={"flex"}
@@ -61,32 +63,13 @@ export default function PayPage() {
                   borderBottom={1}
                   padding={1}
                 >
-                  <Typography padding={1}>상품 할인쿠폰</Typography>
-                  <Typography padding={1}>{}원</Typography>
+                  <Typography padding={1}>총수량</Typography>
+                  <Typography padding={1}>{product.count} 개</Typography>
+                  <Typography padding={1}>배송비</Typography>
+                  <Typography padding={1}>3,000원</Typography>
                 </Box>
               </Box>
             ))}
-            <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              borderBottom={1}
-              padding={1}
-            >
-              <Typography padding={1}>총수량</Typography>
-              <Typography padding={1}>배송비</Typography>
-              <Typography padding={1}>{}원</Typography>
-              <Typography padding={1}>배송비쿠폰</Typography>
-              <Typography padding={1}>{}</Typography>
-            </Box>
-            <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              borderBottom={1}
-              padding={1}
-            >
-              <Typography padding={1}> 총할인 금액</Typography>
-              <Typography padding={1}> {}원</Typography>
-            </Box>
           </CardContent>
         </Card>
       </Box>

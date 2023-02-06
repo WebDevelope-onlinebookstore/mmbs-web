@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { styled, alpha } from "@mui/material/styles";
 import {Card, CardContent,TextField , CardActions ,Button ,Box , Typography} from '@mui/material';
 import axios from 'axios';
-import UserPageLeftSide from 'src/layouts/UserPageLeftSide';
+import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import { useCookies } from "react-cookie"; 
 
 export default function UserUpdate() {
@@ -74,8 +74,6 @@ export default function UserUpdate() {
       if (!result) alert(data.message)
       else {
         setUserId(data.data.userId);
-        // setUserPassword(data.data.userPassword);
-        // setUserPasswordCheck(data.data.userPassword);
         setUserName(data.data.userName);
         setUserEmail(data.data.userEmail);
         setUserPhone(data.data.userPhone);
@@ -83,7 +81,7 @@ export default function UserUpdate() {
         setUserAddressDetail(data.data.userAddressDetail);
         setUserKidBirth(data.data.userKidBirth);
       }
-})
+    })
   }, []);
 
   return (
