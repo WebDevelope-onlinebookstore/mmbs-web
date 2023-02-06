@@ -67,7 +67,7 @@ export default function Navigation() {
                         anchorEl={anchorEl}
                         sx={{ zIndex: 999 }}
                     >
-                        <PoperMenuItem />
+                        <PoperMenuItem setAnchorEl={setAnchorEl} />
                     </Popper>
                     <Search>
                         <SearchIconWrapper>

@@ -2,11 +2,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { AGE_LIST, CATEGORY_LIST } from "../../../../constants/navigation";
-import { To, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React from "react";
 
-export default function PoperMenuItem() {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+interface Props {
+    setAnchorEl: (parameter: null | HTMLElement) => void;
+}
+
+export default function PoperMenuItem({ setAnchorEl }: Props) {
     const navigator = useNavigate();
 
     const menuItemHandler = (url: string) => {
@@ -38,7 +41,7 @@ export default function PoperMenuItem() {
                                 mb={1}
                                 variant='subtitle2'
                                 component='div'
-                                onClick={() => navigator(category.url)}
+                                onClick={() => menuItemHandler(category.url)}
                             >
                                 {sub.subTitle}
                             </Typography>

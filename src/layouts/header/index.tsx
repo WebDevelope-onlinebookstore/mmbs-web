@@ -1,5 +1,5 @@
 import { Box, Divider, Drawer, IconButton, Typography } from "@mui/material";
-import { useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { grey } from "@mui/material/colors";
 import { create } from "zustand";
@@ -62,52 +62,56 @@ export default function Header() {
     };
 
     const list = () => (
-      <Box
-        sx={{ width: 250 }}
-        pt={4}
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
-        <Box display="flex" justifyContent="center">
-          <TagFacesIcon />
-          <Typography variant="subtitle1" align="center" ml={1} mb={2}>
-            안녕하세요.{" "}
-            <Typography variant="subtitle1" component="span" fontWeight={800}>
-              박준현
-            </Typography>{" "}
-            님
-          </Typography>
+        <Box
+            sx={{ width: 250 }}
+            pt={4}
+            role='presentation'
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+        >
+            <Box display='flex' justifyContent='center'>
+                <TagFacesIcon />
+                <Typography variant='subtitle1' align='center' ml={1} mb={2}>
+                    안녕하세요.{" "}
+                    <Typography
+                        variant='subtitle1'
+                        component='span'
+                        fontWeight={800}
+                    >
+                        박준현
+                    </Typography>{" "}
+                    님
+                </Typography>
+            </Box>
+
+            <Divider />
+            <Link to={"/UserPageOrderInquiry"}>
+                <Typography variant='subtitle1' m={2}>
+                    마이 페이지
+                </Typography>
+            </Link>
+            <Typography variant='subtitle1' m={2}>
+                주문 내역 조회
+            </Typography>
+            <Typography variant='subtitle1' m={2}>
+                장바구니
+            </Typography>
+            <Typography variant='subtitle1' m={2}>
+                리뷰 / 문의
+            </Typography>
+            <Link to={"/userUpdate"}>
+                <Typography variant='subtitle1' m={2}>
+                    회원정보수정
+                </Typography>
+            </Link>
+            <Link to={"/orderPayment"}>
+                <Typography variant='subtitle1' m={2}>
+                    주문 결제 페이지
+                </Typography>
+            </Link>
         </Box>
-
-        <Divider />
-        <Link to={"/UserPageOrderInquiry"}>
-          <Typography variant="subtitle1" m={2}>
-            마이 페이지
-          </Typography>
-        </Link>
-        <Typography variant="subtitle1" m={2}>
-          주문 내역 조회
-        </Typography>
-        <Typography variant="subtitle1" m={2}>
-          장바구니
-        </Typography>
-        <Typography variant="subtitle1" m={2}>
-          리뷰 / 문의
-        </Typography>
-        <Link to={"/userUpdate"}>
-          <Typography variant="subtitle1" m={2}>
-            회원정보수정
-          </Typography>
-        </Link>
-        <Link to={"/orderPayment"}>
-          <Typography variant="subtitle1" m={2}>
-            주문 결제 페이지
-          </Typography>
-        </Link>
-      </Box>
     );
-
+    
     return (
         <>
             <Box
@@ -166,7 +170,7 @@ export default function Header() {
                             <Typography
                                 variant='subtitle1'
                                 m={2}
-                                onClick={() => logOutHandler}
+                                onClick={() => logOutHandler()}
                             >
                                 로그아웃
                             </Typography>
