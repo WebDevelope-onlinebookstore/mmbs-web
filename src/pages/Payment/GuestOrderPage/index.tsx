@@ -10,22 +10,14 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import axios from 'axios';
 import { useUserStore } from 'src/stores';
 
-export default function OrderPage() {
-
-  const [message, setMessage] = React.useState('');
-  const [gift, setGift] = React.useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setMessage(event.target.value);
-    setGift(event.target.value);
-  };
+export default function GuestOrderPage() {
 
   const [order, setOrder] = useState<any>(null);
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [orderUserWhether, setOrderUserWhether] = useState<string>('');
   const [orderGuestPassword, setOrderGuestPassword] = useState<string>('');
   const [orderUserId, setOrderUserId] = useState<string>('');
-  const [giftCode, setGiftCode] = useState<number>(0);
+  const [giftCode, setGiftCode] = useState<string>('');
   const [orderUserName, setOrderUserName] = useState<string>('');
   const [orderUserPhone, setOrderUserPhone] = useState<string>('');
   const [orderUserEmail, setOrderUserEmail] = useState<string>('');
@@ -47,6 +39,14 @@ export default function OrderPage() {
   const [userAddressDetail, setUserAddressDetail] = useState<string>('');
 
   const { user } = useUserStore();
+
+  const handleChange1 = (event: SelectChangeEvent) => {
+    setOrderShipMessage(event.target.value);
+  };
+
+  const handleChange2 = (event: SelectChangeEvent) => {
+    setGiftCode(event.target.value);
+  };
   
   const paymentFinishHandler = async () => {
 
@@ -68,7 +68,7 @@ export default function OrderPage() {
       // orderStatus,
       // orderShipCompany,
       // orderShipNumber,
-      // orderShipMessage
+      orderShipMessage
     };
 
     axios
@@ -134,15 +134,15 @@ export default function OrderPage() {
               type="phone"
               variant="standard"
               value={orderUserPhone}
-              onChange={(e) => setUserPhone(e.target.value)}
+              onChange={(e) => setOrderUserPhone(e.target.value)}
             />
             <TextField
               fullWidth
               label="주문자 이메일"
               type="email"
               variant="standard"
-              value={userEmail}
-              onChange={(e) => setUserEmail(e.target.value)}
+              value={orderUserEmail}
+              onChange={(e) => setOrderUserEmail(e.target.value)}
             />
           </CardContent>
         </Card>
@@ -179,16 +179,16 @@ export default function OrderPage() {
               label="수령인 주소"
               type="address"
               variant="standard"
-              value={userAddress}
-              onChange={(e) => setUserAddress(e.target.value)}
+              value={orderShipAddress}
+              onChange={(e) => setOrderShipAddress(e.target.value)}
             />
             <TextField
               fullWidth
               label="수령인 상세주소"
               type="address"
               variant="standard"
-              value={userAddressDetail}
-              onChange={(e) => setUserAddressDetail(e.target.value)}
+              value={orderShipAddressDetail}
+              onChange={(e) => setOrderShipAddressDetail(e.target.value)}
             />
           </CardContent>
           <CardContent>
@@ -199,16 +199,16 @@ export default function OrderPage() {
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                value={message}
+                value={orderShipMessage}
                 label="Ship Message"
-                onChange={handleChange}
+                onChange={handleChange1}
               >
                 <MenuItem value="">
                   <em>메시지를 선택해주세요.</em>
                 </MenuItem>
-                <MenuItem value={10}>경비실에 맡겨주세요</MenuItem>
-                <MenuItem value={20}>배송전 연락주세요</MenuItem>
-                <MenuItem value={30}>안전하게 와주세요</MenuItem>
+                <MenuItem value={'경비실에 맡겨주세요'}>경비실에 맡겨주세요</MenuItem>
+                <MenuItem value={'배송전 연락주세요'}>배송전 연락주세요</MenuItem>
+                <MenuItem value={'안전하게 와주세요'}>안전하게 와주세요</MenuItem>
               </Select>
             </FormControl>
             <FormControl sx={{ m: 1, minWidth: 120 }} style={{ width: 600 }}>
@@ -218,17 +218,17 @@ export default function OrderPage() {
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                value={gift}
+                value={giftCode}
                 label="Select gift"
-                onChange={handleChange}
+                onChange={handleChange2}
               >
                 <MenuItem value="">
                   <em>사은품을 선택해주세요</em>
                 </MenuItem>
-                <MenuItem value={10}>고래밥</MenuItem>
-                <MenuItem value={20}>꼬깔콘</MenuItem>
-                <MenuItem value={30}>칙촉</MenuItem>
-                <MenuItem value={40}>빼빼로</MenuItem>
+                <MenuItem value={'고래밥'}>고래밥</MenuItem>
+                <MenuItem value={'꼬깔콘'}>꼬깔콘</MenuItem>
+                <MenuItem value={'칙촉'}>칙촉</MenuItem>
+                <MenuItem value={'빼빼로'}>빼빼로</MenuItem>
               </Select>
             </FormControl>
           </CardContent>

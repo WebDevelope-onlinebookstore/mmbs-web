@@ -83,33 +83,35 @@ export default function Header() {
                     님
                 </Typography>
             </Box>
-
-            <Divider />
-            <Link to={"/UserPageOrderInquiry"}>
-                <Typography variant='subtitle1' m={2}>
-                    마이 페이지
-                </Typography>
-            </Link>
-            <Typography variant='subtitle1' m={2}>
-                주문 내역 조회
-            </Typography>
-            <Typography variant='subtitle1' m={2}>
+        <Divider />
+        <Link to={"/orderInquiryPage"}>
+          <Typography variant="subtitle1" m={2}>
+            마이 페이지
+          </Typography>
+        </Link>
+        <Typography variant="subtitle1" m={2}>
+          주문 내역 조회
+        </Typography>
+        <Link to={"/cart"}>
+            <Typography variant="subtitle1" m={2}>
                 장바구니
             </Typography>
-            <Typography variant='subtitle1' m={2}>
-                리뷰 / 문의
-            </Typography>
-            <Link to={"/userUpdate"}>
-                <Typography variant='subtitle1' m={2}>
-                    회원정보수정
-                </Typography>
-            </Link>
-            <Link to={"/orderPayment"}>
-                <Typography variant='subtitle1' m={2}>
-                    주문 결제 페이지
-                </Typography>
-            </Link>
-        </Box>
+        </Link>
+        <Typography variant="subtitle1" m={2}>
+          리뷰 / 문의
+        </Typography>
+        <Link to={"/userUpdate"}>
+          <Typography variant="subtitle1" m={2}>
+            회원정보수정
+          </Typography>
+        </Link>
+        <Link to={"/orderPayment"}>
+          <Typography variant="subtitle1" m={2}>
+            주문 결제 페이지
+          </Typography>
+        </Link>
+      </Box>
+
     );
     
     return (
