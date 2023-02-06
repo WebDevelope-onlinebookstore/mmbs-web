@@ -89,9 +89,11 @@ export default function Header() {
         <Typography variant="subtitle1" m={2}>
           주문 내역 조회
         </Typography>
-        <Typography variant="subtitle1" m={2}>
-          장바구니
-        </Typography>
+        <Link to={"/cart"}>
+            <Typography variant="subtitle1" m={2}>
+                장바구니
+            </Typography>
+        </Link>
         <Typography variant="subtitle1" m={2}>
           리뷰 / 문의
         </Typography>
