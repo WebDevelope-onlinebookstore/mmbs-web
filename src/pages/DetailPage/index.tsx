@@ -15,15 +15,20 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import { Link, useParams } from "react-router-dom";
-import { useSelectProductStore } from 'src/stores';
+import { useSelectProductStore, useUserStore } from 'src/stores';
 
 export default function DetailPage() {
+
+    // userStore에서 user정보 가져온다
+    // user정보는 login 할때 userStore에 저장
+
+
 
     const { productSeq } = useParams();
     const { setSelectProduct } = useSelectProductStore();
 
     const [Value, setValue] = React.useState('1');
-    const [count, setCount] = React.useState(1);
+    // const [count, setCount] = React.useState(1);
     const [product, setProduct] = useState<any>(null);
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -53,30 +58,35 @@ export default function DetailPage() {
     const [cartProductName,setCartProductName]=useState<string>('');
     const [cartProductImage,setCartProductImage]=useState<string>('');
     const [cartProductPrice,setCartProductPrice]=useState<string>('');
-    const [cartProductAmount,setCartProductAmount]=useState<string>('');
+    const [cartProductAmount,setCartProductAmount]=useState<number>(1);
     const [cartUserId,setCartUserId]=useState<string>('');
 
+    const{user} = useUserStore();
     // 장바구니 담기
-    const cartAdd = ()=>{
-        const data = {
-                cartId
-        }
-        axios.post(`http://localhost:4080/api/cart/cartInsert`,data)
-            .then((response)=>{
-                const data = response.data;
-                if(data.data){
-                    setCartId(data.data.cartId);
-                    setCartUserId(data.data.cartUserId);
-                    setCartProductName(data.data.productTitle);
-                    setCartProductImage(data.data.productImageUrl);
-                    setCartProductPrice(data.data.productPrice);
-                    setCount(data.data.cartProductAmount);
-                }
-            })
-    }
+        const cartAdd = ()=>{
+            // 장바구니에 담을 때는 필요한 정보가 
+            // 유저 아이디 제품 시퀀스
+            // 유저 아이디는 userStore에서 가져오고
+            // 제품 시퀀스는 리스트에서 선택할때 pathVariavle로 가져옴
+            // const {productseq}=useParams();
+         const data = {
+            // userId는 db에 저장된 그열을 다 가지고 오는건가? / productSeq도??
+            cartUserId: user.userId,
+            cartProductId: productSeq,
+            cartProductAmount,  
+         }
+         axios.post(`http://localhost:4080/api/cart/cartInsert`,data)
+             .then((response)=>{
+                 const data = response.data;
+                 if(data.data){
+                     alert('성공')
+                 }
+             })
+             .catch((error) => {"qweee" });
+     }
 
     const buyingHandler = () => {
-        setSelectProduct([{...product, count}]);
+        setSelectProduct([{...product, cartProductAmount}]);
     }
 
     // 좋아요 클릭시 +1
@@ -84,7 +94,7 @@ export default function DetailPage() {
         const data = {
             productSeq
         }
-        axios.post(`http://localhost:4080/api/auth/dtlLikePage`,data)
+        axios.post(`http://localhost:4080/api/dtl/dtlLikePage`,data)
             .then((response) => {
 
                 const data = response.data;
@@ -195,17 +205,17 @@ export default function DetailPage() {
 
                                             <Button
                                                 onClick={() => {
-                                                    setCount(Math.max(count - 1, 0));
+                                                    setCartProductAmount(Math.max(cartProductAmount - 1, 0));
                                                 }}
                                             >
                                                 <RemoveIcon fontSize="small" />
                                             </Button>
                                             <Box pl={3}>
-                                                <Badge badgeContent={count}></Badge>
+                                                <Badge badgeContent={cartProductAmount}></Badge>
                                             </Box>
                                             <Button
                                                 onClick={() => {
-                                                    setCount(count + 1);
+                                                    setCartProductAmount(cartProductAmount + 1);
                                                 }}
                                             >
                                                 <AddIcon fontSize="small" />
@@ -235,7 +245,7 @@ export default function DetailPage() {
                             </Link>
                         </Box>
                         <Box border={1}>
-                            <Button>장바구니 담기</Button>
+                            <Button onClick={()=>cartAdd()}>장바구니 담기</Button>
                         </Box>
                         <Box border={1} mr={3}>
                             <Button onClick={() => Likepro()}>좋아요</Button>
