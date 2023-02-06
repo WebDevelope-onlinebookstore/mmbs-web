@@ -50,55 +50,60 @@ function BookList() {
     }, [productGenre, productSubGenre]);
 
     return (
-      <div>
-        <div className="list-top">
-          <form>
-            <select name="serachFrm" onChange={(e) => sortList(e)}>
-              <option value="none">=== 선택 ===</option>
-              <option value="추천순">추천순</option>
-              <option value="가격순">가격순</option>
-              <option value="ㄱㄴㄷ순">ㄱㄴㄷ순</option>
-            </select>
-          </form>
-        </div>
-        <div className="container">
-          <div className="sub-menu">
-            <ul>
-              <h2 className="title">
-                {menu && menu.category === "1"
-                  ? "0~3세"
-                  : menu.category === "2"
-                  ? "4~7세"
-                  : menu.category}
-              </h2>
-              {menu &&
-                menu.subCategory.map((subItem: any) => (
-                  <li>
-                    <Link to={subItem.url}>{subItem.name}</Link>
-                  </li>
-                ))}
-            </ul>
-          </div>
-
-          <div className="list-wrapper">
-            {bookList.map((item) => (
-              <div className="list-container">
-                <div className="list-img">
-                  <div className="imgtle">
-                    <Link to={`/dtlPage/${item.productSeq}`}>
-                      <img className="book-img" src={item.productImageUrl} />
-                    </Link>
-                  </div>
-                  <div className="book-name">{item.productTitle}</div>
-                  <div className="price">
-                    <b>{item.productPrice}</b>원
-                  </div>
+        <div>
+            <div className='list-top'>
+                <form>
+                    <select name='serachFrm' onChange={(e) => sortList(e)}>
+                        <option value='none'>=== 선택 ===</option>
+                        <option value='추천순'>추천순</option>
+                        <option value='가격순'>가격순</option>
+                        <option value='ㄱㄴㄷ순'>ㄱㄴㄷ순</option>
+                    </select>
+                </form>
+            </div>
+            <div className='container'>
+                <div className='sub-menu'>
+                    <ul>
+                        <h2 className='title'>
+                            {menu && menu.category === "1"
+                                ? "0~3세"
+                                : menu.category === "2"
+                                ? "4~7세"
+                                : menu.category}
+                        </h2>
+                        {menu &&
+                            menu.subCategory.map((subItem: any) => (
+                                <li>
+                                    <Link to={subItem.url}>{subItem.name}</Link>
+                                </li>
+                            ))}
+                    </ul>
                 </div>
-              </div>
-            ))}
-          </div>
+
+                <div className='list-wrapper'>
+                    {bookList.map((item) => (
+                        <div className='list-container'>
+                            <div className='list-img'>
+                                <div className='imgtle'>
+                                    <Link to={`/dtlPage/${item.productSeq}`}>
+                                        <img
+                                            className='book-img'
+                                            src={item.productImageUrl}
+                                        />
+                                    </Link>
+                                </div>
+                                <div className='book-name'>
+                                    {item.productTitle}
+                                </div>
+                                <div className='price'>
+                                    <b>{item.productPrice}</b>원
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-      </div>
     );
 }
 
