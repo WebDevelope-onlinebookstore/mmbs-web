@@ -81,7 +81,7 @@ export default function Header() {
         </Box>
 
         <Divider />
-        <Link to={"/UserPageOrderInquiry"}>
+        <Link to={"/orderInquiryPage"}>
           <Typography variant="subtitle1" m={2}>
             마이 페이지
           </Typography>
