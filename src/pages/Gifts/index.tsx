@@ -67,7 +67,6 @@ export default function Gifts() {
 
   return (
     <>
-<<<<<<< HEAD
       <Box>
         <Accordion>
           <Box padding={1}>
@@ -86,49 +85,10 @@ export default function Gifts() {
                 height={200}
                 component="img"
                 src={gift && gift.giftImage}
-              />
+              ></Box>
               <Box ml={7}>
                 <Box display={"flex"} justifyContent={"center"}>
                   사은품 변경하기
-=======
-    <Box>
-        <Accordion >
-            <Box padding={1} >
-                <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                >
-                <Typography >사은품 변경</Typography>
-                </AccordionSummary>
-            </Box>
-        
-            <AccordionDetails>
-                <Box display={'flex'}>
-                    
-                    <Box width={250} height={200} component="img" src={gift && gift.giftImage}>
-                    
-                    </Box>
-                <Box ml={7}>
-                    <Box display={'flex'} justifyContent={'center'}>사은품 변경하기</Box>
-                    <br />
-                    <Autocomplete
-                        onChange={(event: any, newValue: string | null) => {
-                            selectGiftHandler(newValue);
-                        }}
-                        onInputChange={(event, newInputValue) => {
-                            selectGiftHandler(newInputValue);
-                        }}
-                        id="controllable-states-demo"
-                        options={giftNameList}
-                        sx={{ width: 300 }}
-                        renderInput={(params) => <TextField {...params} label="사은품 선택하기" />}
-                    />
-                    <Box display={'flex'} pt={5} justifyContent={'center'}>
-                        <Button onClick={giftAdd}>변경하기</Button>
-                    </Box>
-                    </Box>
->>>>>>> 42a5215c14979e526449a094a14e4a30bd03d870
                 </Box>
                 <br />
                 <Autocomplete
@@ -146,9 +106,27 @@ export default function Gifts() {
                   )}
                 />
                 <Box display={"flex"} pt={5} justifyContent={"center"}>
-                  <Button>변경하기</Button>
+                  <Button onClick={giftAdd}>변경하기</Button>
                 </Box>
               </Box>
+            </Box>
+            <br />
+            <Autocomplete
+              onChange={(event: any, newValue: string | null) => {
+                selectGiftHandler(newValue);
+              }}
+              onInputChange={(event, newInputValue) => {
+                selectGiftHandler(newInputValue);
+              }}
+              id="controllable-states-demo"
+              options={giftNameList}
+              sx={{ width: 300 }}
+              renderInput={(params) => (
+                <TextField {...params} label="사은품 선택하기" />
+              )}
+            />
+            <Box display={"flex"} pt={5} justifyContent={"center"}>
+              <Button>변경하기</Button>
             </Box>
           </AccordionDetails>
         </Accordion>
