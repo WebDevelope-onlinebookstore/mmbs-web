@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../stores';
 import "./cart.css";
 
@@ -11,8 +12,61 @@ export default function Cart() {
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [expectedPrice, setExpectedPrice] = useState<number>(0);
     const [flag, setFlag] = useState<boolean>(true);
-    const [cookies] = useCookies();
     const [totalAmount, setTotalAmount] = useState<number>(0);
+
+    const [cookies] = useCookies();
+    const navigator = useNavigate();
+
+    const deleteCartList = (cartId: number) =>{
+        
+        const data = { cartId };
+
+        const token = cookies.token;
+        
+        axios
+        .post("http://localhost:4080/api/cart/cartDelete", data, {headers: {Authorization: `Bearer ${token}`}})
+        .then((response)=>{
+            const data = response.data;
+            if(data.result){
+                const list = data.data;
+                setCartList(list);
+            }
+        })
+        .catch((error) => {"qweee" });
+      };
+
+    const saveCartList = () => {
+
+        const selectCartList: any[] = []
+        selectCart.forEach((selected) => {
+            cartList.forEach((cart) => {
+                if(cart.cartId === selected) selectCartList.push(cart);
+            })
+        })
+        
+        const data = {
+            selectCartList
+          };
+        // const changeAmount=()=>{
+        //     setCartProductAmount
+        // }
+
+        const token = cookies.token;
+
+        axios
+        .post("http://localhost:4080/api/cart/cartAmountUpdate", data, {headers: {Authorization: `Bearer ${token}`}})
+        .then((response)=>{
+            const data = response.data;
+            if(data.result){
+                alert('성공')
+                console.log(data)
+                navigator('/orderPayment')
+                
+            }
+        })
+        .catch((error) => {"qweee" });
+      };
+    
 
     const setSelectCartItem = (cartId: number) => {
         let totalCount = 0;
@@ -60,22 +114,22 @@ export default function Cart() {
         let totalCount = 0;
         cartList.forEach((cartItem) => {
             if (cartItem.cartId === cartId) {
-                if (!(cartItem.cartProductAmount === 1 && num === -1))
+                if (!(cartItem.cartProductAmount === 1 && num === -1)){
                     cartItem.cartProductAmount += num;
-                // totalCount += cartItem.cartProductAmount;
+                }
             }
         })
 
         let total = 0;
         cartList.forEach((cartItem) => {
-            if (selectCart.findIndex((element: any) => element === cartItem.cartId) !== -1) { total += cartItem.cartProductPrice * cartItem.cartProductAmount; }
+            if (selectCart.findIndex((element: any) => element === cartItem.cartId) !== -1) { total += cartItem.cartProductPrice * cartItem.cartProductAmount; totalCount += cartItem.cartProductAmount; }
         })
         const expected = total < 30000 ? total + 3000 : total;
         
         setTotalPrice(total);
         setExpectedPrice(expected);
         setCartList(cartList);
-        // setTotalAmount(totalCount);
+        setTotalAmount(totalCount);
         setFlag(!flag);
     }
 
@@ -96,7 +150,7 @@ export default function Cart() {
             </h1>
             <ul className="cart-active-tap" >
                 <li className="active-tap">
-                    <span>도서상품( <em>count 0</em> )
+                    <span>도서상품( <em>{totalAmount}</em> )
                     </span>
                 </li>
 
@@ -123,9 +177,12 @@ export default function Cart() {
                         <tr>
                             <th></th>
                             <th colSpan={2}>상품정보</th>
+                            <th>이미지</th>
                             <th>금액</th>
                             <th>수량</th>
                             <th>결제금액</th>
+                            <th>지우기</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody className='showInFo'>
@@ -141,9 +198,11 @@ export default function Cart() {
                             <tr>
                                 <td><input type="checkBox" onChange={() => setSelectCartItem(cartItem.cartId)} /></td>
                                 <td colSpan={2}>{cartItem.cartProductName}</td>
+                                <td><div><img src={cartItem.cartProductImage} width="80%" height="100px" /></div></td>
                                 <td>{cartItem.cartProductPrice}원</td>
-                                <td><button className='amountButton' onClick={() => addAmount(cartItem.cartId, 1)}>△</button> {cartItem.cartProductAmount}  권 <button onClick={() => addAmount(cartItem.cartId, -1)}>▽</button></td>
+                                <td><button className='amountButton' onClick={() => addAmount(cartItem.cartId, 1)}>△</button> {cartItem.cartProductAmount }  권 <button onClick={() => addAmount(cartItem.cartId, -1)}>▽</button></td>
                                 <td>{cartItem.cartProductPrice * cartItem.cartProductAmount}원</td>
+                                <td><button onClick={()=>deleteCartList(cartItem.cartId)}>❎</button></td>
                             </tr>
                         ))}
                     </tbody>
@@ -190,7 +249,7 @@ export default function Cart() {
             <p id="cart-info-txt" className="cart-info-txt-comment"></p>
             <div className="order-botton-area">
                 <a href="" className="botton-keep-shopping">계속 쇼핑하기</a>
-                <button className="botton-solid">구매하기</button>
+                <button className="botton-solid" onClick={()=>saveCartList()}>구매하기</button>
             </div>
         </div>
 

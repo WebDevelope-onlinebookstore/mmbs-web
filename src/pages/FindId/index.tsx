@@ -14,7 +14,7 @@ export default function FindId() {
 
     const findIdHandeler =() => {
         if(userName.length === 0 || userEmail.length ===0){
-        alert('유저네임과 이메일을 입력하세요.')
+        alert('닉네임과 이메일을 입력하세요.')
         return;
         }
         const data ={
@@ -28,6 +28,9 @@ export default function FindId() {
             if(!responseData.result){
                 alert('아이디를 찾을 수 없습니다.')
                 return;
+            }else{
+                alert('성공')
+                console.log(responseData)
             }
             const {token, exprTime, user}=responseData.data;
             const expires = new Date();
