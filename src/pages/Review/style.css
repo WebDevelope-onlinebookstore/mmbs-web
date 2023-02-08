@@ -302,7 +302,7 @@ a {
 
 .curation .review .review_txt .star_wrapper ul li.total .star-rating, .curation .review .star_wrapper ul li.total .star-rating span {
     height: 14px;
-    background-image: url(/static/pc/images/product/ico_star_bb.png);
+    /* background-image: url(/static/pc/images/product/ico_star_bb.png); */
     background-size: 74px 28px;
 }
 
@@ -357,7 +357,7 @@ element.style {
 }
 
 .pagination .next {
-    background-image: url(./mmbs/page_prev\ \(1\).png);
+    /* background-image: url(./mmbs/page_prev\ \(1\).png); */
     margin-left: 14px;
 }
 

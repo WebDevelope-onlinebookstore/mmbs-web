@@ -15,10 +15,11 @@ import DtlPage from "./pages/DetailPage";
 import UserUpdate from "./pages/UserUpdate";
 import MyPageOrderInquiry from "./pages/MyPageOrderInquiry";
 import 국내도서 from "./pages/bookList/category/국내도서";
-import Payment from "./pages/Payment";
+import OrderPage from "./pages/Payment";
 import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
 import FindPassword from "./pages/FindPassword/idex";
+import Review from "./pages/Review"
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
@@ -65,11 +66,12 @@ function App() {
                     element={<국내도서 />}
                 />
                 {/* // component : 주문 결제 화면 */}
-                <Route path='/orderPayment' element={<Payment />} />
+                <Route path='/orderPayment' element={<OrderPage />} />
 
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/findId' element={<FindId />} />
                 <Route path='/findPassword' element={<FindPassword />} />
+                <Route path='/review' element={<Review />} />
             </Routes>
             {/* // component : 마이페이지 화면 */}
             {/* // component : ?? 화면 */}

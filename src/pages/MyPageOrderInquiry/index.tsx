@@ -31,7 +31,7 @@ export default function MyPageOrderInquiry() {
     const [orderShipMessage, setOrderShipMessage] = useState<string>('');
     
     const [orderDetailSeq, setOrderDetailSeq] = useState<number>(0);
-    const [orderNumberF, setOrderNumberF] = useState<string>('');
+    const [orderNumberDetail, setOrderNumberDetail] = useState<string>('');
     const [productId, setProductId] = useState<string>('');
     const [productPrice, setProductPrice] = useState<number>(0);
     const [orderCount, setOrderCount] = useState<number>(0);
