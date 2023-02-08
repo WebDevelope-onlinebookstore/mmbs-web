@@ -2,59 +2,66 @@ import { Button, Paper } from '@mui/material'
 import Card from '@mui/material/Card/Card'
 import Typography from '@mui/material/Typography'
 import { Box } from '@mui/system'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import Carousel from 'react-material-ui-carousel'
 
 import SampleImg from '../../../assets/images/XL.jpeg'
 
 export default function MainCarousel() {
-    const items = [
-        {
-            name: "Random Name #1",
-            description: "Probably the most random thing you have ever seen!"
-        },
-        {
-            name: "Random Name #2",
-            description: "Hello World!"
-        }
-    ]
 
+    const [bestList, setBestList] = useState<any[]>([]);
+
+    useEffect(()=>{
+        axios.get(`http://localhost:4080/api/best`)
+        .then((response)=>{
+            const data = response.data;
+            if(data){
+                const tmp: any[] = [[], []];
+                data.data.forEach((item: any, index: number) => {
+                    if(index < 5) 
+                        tmp[0].push(item);
+                    else
+                        tmp[1].push(item);
+                })
+                setBestList(tmp);
+            }
+        })
+    }, [])
   return (
     <Carousel>
         {
-            items.map( (item, i) => <Item key={i} item={item} /> )
+            bestList.map( (items, i) => <Item key={i} items={items} /> )
         }
     </Carousel>
   )
 }
-
-function Item(props: any)
+function Item({items}: any)
 {
     return (
         <Paper>
             <Box p={2} display='flex' justifyContent='space-around'>
-                {tmpList.map((item) => (
+                {/* [1, 2, 3, 4, 5] */}
+                {/* [6, 7, 8, 9, 10] */}
+                {items.map((item: any) => (
                     <PaperItem item={item} />
                 ))}
             </Box>
         </Paper>
     )
 }
-
-function PaperItem(props: any) {
-    const {item} = props;
+function PaperItem({item}: any) {
     return (
         <Card>
             <Box width='12.5vw'>
-                <Box component='img' src={item.image} width='100%'></Box>
-                <Typography m={1} fontWeight="900">{item.title}</Typography>
-                <Typography m={1} fontWeight="700" color="#999999">{item.writer}</Typography>
-                <Typography m={1} fontWeight="900">{item.price}원</Typography>
+                <Box component='img' src={item.productImageUrl} width='100%'></Box>
+                <Typography m={1} fontWeight="900">{item.productTitle}</Typography>
+                <Typography m={1} fontWeight="700" color="#999999">{item.productWriter}</Typography>
+                <Typography m={1} fontWeight="900">{item.productPrice}원</Typography>
             </Box>
         </Card>
     )
 }
-
 const tmpList = [
     {
         image: SampleImg,

@@ -55,6 +55,15 @@ export default function Gifts() {
     })
     .catch((error)=>{'에러'});
   },[])
+  const giftAdd = () =>{
+    const data = {
+        selectGiftHandler
+    }
+      axios.post(`http://localhost:4080/api/auth/giftorder`,data)
+    
+
+
+  }
 
   return (
     <>
@@ -92,7 +101,7 @@ export default function Gifts() {
                         renderInput={(params) => <TextField {...params} label="사은품 선택하기" />}
                     />
                     <Box display={'flex'} pt={5} justifyContent={'center'}>
-                        <Button>변경하기</Button>
+                        <Button onClick={giftAdd}>변경하기</Button>
                     </Box>
                     </Box>
                 </Box>
