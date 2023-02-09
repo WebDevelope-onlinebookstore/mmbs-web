@@ -25,6 +25,8 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useSelectProductStore, useUserStore } from "src/stores";
 
+import { useCookies } from "react-cookie"; 
+
 export default function DetailPage() {
     // userStore에서 user정보 가져온다
     // user정보는 login 할때 userStore에 저장
@@ -64,12 +66,14 @@ export default function DetailPage() {
     // 이미지
     const [productImageUrl, setProductImageUrl] = useState<string>("");
 
-    const [cartId, setCartId] = useState<number>(0);
-    const [cartProductName, setCartProductName] = useState<string>("");
-    const [cartProductImage, setCartProductImage] = useState<string>("");
-    const [cartProductPrice, setCartProductPrice] = useState<string>("");
-    const [cartProductAmount, setCartProductAmount] = useState<number>(1);
-    const [cartUserId, setCartUserId] = useState<string>("");
+    const [cartId,setCartId]=useState<number>(0);
+    const [cartProductName,setCartProductName]=useState<string>('');
+    const [cartProductImage,setCartProductImage]=useState<string>('');
+    const [cartProductPrice,setCartProductPrice]=useState<string>('');
+    const [cartProductAmount,setCartProductAmount]=useState<number>(1);
+    const [cartUserId,setCartUserId]=useState<string>('');
+    
+    const [cookies, setCookies] = useCookies();
 
     const { user } = useUserStore();
     // 장바구니 담기
@@ -83,20 +87,19 @@ export default function DetailPage() {
             // userId는 db에 저장된 그열을 다 가지고 오는건가? / productSeq도??
             cartUserId: user.userId,
             cartProductId: productSeq,
-            cartProductAmount,
-        };
-        axios
-            .post(`http://localhost:4080/api/cart/cartInsert`, data)
-            .then((response) => {
-                const data = response.data;
-                if (data.data) {
-                    alert("성공");
-                }
-            })
-            .catch((error) => {
-                "qweee";
-            });
-    };
+            cartProductAmount,  
+         }
+        //  $가 뭘까요?
+         axios.post(`http://localhost:4080/api/cart/cartInsert`,data,{
+            headers:{Authorization: `Bearer ${cookies.token}`}})
+             .then((response)=>{
+                 const data = response.data;
+                 if(data.data){
+                     alert('성공')
+                 }
+             })
+             .catch((error) => {"qweee" });
+     }
 
     const buyingHandler = () => {
         setSelectProduct([{ ...product, cartProductAmount }]);

@@ -20,13 +20,14 @@ import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
+import SearchAdd from "./pages/Search";
+import Review from "./pages/Review"
+import ResetPassword from "./pages/ResetPassword"
+
 import MyPage from "./layouts/MyPage";
 import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import UserAskList from './pages/UserAsk/UserAskList';
 import UserAskWrite from './pages/UserAsk/UserAskWrite';
-
-import Review from "./pages/Review"
-import ResetPassword from "./pages/ResetPassword"
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
@@ -49,47 +50,48 @@ function App() {
 
     const [tmp, setTmp] = useState<number>(0);
     return (
-        <>
-            <Header />
-            <Navigation />
-            <Routes>
-                {/* // component : Main 화면 */}
-                <Route path='/' element={<Main />} />
-                {/* // component : 회원가입 화면 */}
-                <Route path='/dtlpage/:productSeq' element={<DtlPage />} />
-                <Route path='/signIn' element={<SignIn />} />
-                {/* // component : 로그인 화면 */}
-                <Route path='/signup' element={<SignUp />} />
-                {/* // component : 마이페이지 화면 */}
-                
-                {/* // component : 회원정보수정 화면 */}
-                <Route path='/userUpdate' element={<UserUpdate />} />
-                {/* // component : 도서 목록 화면 */}
-                <Route
-                    path='/bookList/:productGenre/:productSubGenre'
-                    element={<국내도서 />}
-                />
-                {/* // component : 주문 결제 화면 */}
-                <Route path='/orderPayment' element={<OrderPage />} />
+      <>
+        <Header />
+        <Navigation />
+        <Routes>
+          {/* // component : Main 화면 */}
+          <Route path="/" element={<Main />} />
+          {/* // component : 회원가입 화면 */}
+          <Route path="/dtlpage/:productSeq" element={<DtlPage />} />
+          <Route path="/signIn" element={<SignIn />} />
+          {/* // component : 로그인 화면 */}
+          <Route path="/signup" element={<SignUp />} />
+          {/* // component : 마이페이지 화면 */}
 
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/findId' element={<FindId />} />
-                <Route path='/findPassword' element={<FindPassword />} />
-                <Route path='/resetPassword' element={<ResetPassword />} />
-                <Route path='/review' element={<Review />} />
-                <Route path='/userAskList' element={<UserAskList />} />
-                <Route path='/userAskWrite' element={<UserAskWrite />} />
-                {/* // component : 마이페이지 화면 */}
-                <Route path='/myPage' element={<UserPageLeftSide />}>
-                    <Route index element={<MyPageOrderInquiry />} />
-                    <Route index element={<UserAskList />} />
-                    <Route index element={<UserAskWrite />} />
-                </Route>
-            </Routes>
-            
-            {/* // component : ?? 화면 */}
-            <Footer />
-        </>
+          {/* // component : 회원정보수정 화면 */}
+          <Route path="/userUpdate" element={<UserUpdate />} />
+          {/* // component : 도서 목록 화면 */}
+          <Route
+            path="/bookList/:productGenre/:productSubGenre"
+            element={<국내도서 />}
+          />
+          {/* // component : 주문 결제 화면 */}
+          <Route path="/orderPayment" element={<OrderPage />} />
+
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/findId" element={<FindId />} />
+          <Route path="/findPassword" element={<FindPassword />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/review" element={<Review />} />
+          <Route path="/userAskList" element={<UserAskList />} />
+          <Route path="/userAskWrite" element={<UserAskWrite />} />
+          {/* // component : 마이페이지 화면 */}
+          <Route path="/myPage" element={<UserPageLeftSide />}>
+            <Route index element={<MyPageOrderInquiry />} />
+            {/* <Route index element={<UserAskList />} />
+                    <Route index element={<UserAskWrite />} /> */}
+          </Route>
+          <Route path="/search/:productTitle" element={<SearchAdd />} />
+        </Routes>
+
+        {/* // component : ?? 화면 */}
+        <Footer />
+      </>
     );
 }
 export default App;
