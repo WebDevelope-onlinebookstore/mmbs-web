@@ -96,7 +96,7 @@ function BookList() {
                                     {item.productTitle}
                                 </div>
                                 <div className='price'>
-                                    <b>{item.productPrice}</b>원
+                                    <b>가격 : {item.productSalesPrice}</b>원
                                 </div>
                             </div>
                         </div>
