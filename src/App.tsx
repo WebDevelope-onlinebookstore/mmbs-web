@@ -18,10 +18,10 @@ import 국내도서 from "./pages/bookList/category/국내도서";
 import OrderPage from "./pages/Payment";
 import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
-import Review from "./pages/Review";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
 import Review from "./pages/Review"
+import ResetPassword from "./pages/ResetPassword"
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
@@ -73,6 +73,7 @@ function App() {
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/findId' element={<FindId />} />
                 <Route path='/findPassword' element={<FindPassword />} />
+                <Route path='/resetPassword' element={<ResetPassword />} />
                 <Route path='/review' element={<Review />} />
             </Routes>
             {/* // component : 마이페이지 화면 */}
