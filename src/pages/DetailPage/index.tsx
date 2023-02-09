@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import { Link, useParams } from "react-router-dom";
-import { useSelectProductStore, useUserStore } from 'src/stores';
+import { useSelectProductStore, useUserStore } from "src/stores";
 
 import { useCookies } from "react-cookie"; 
 
@@ -34,12 +34,10 @@ export default function DetailPage() {
     // userStore에서 user정보 가져온다
     // user정보는 login 할때 userStore에 저장
 
-
-
     const { productSeq } = useParams();
     const { setSelectProduct } = useSelectProductStore();
 
-    const [Value, setValue] = React.useState('1');
+    const [Value, setValue] = React.useState("1");
 
     // const [count, setCount] = React.useState(1);
     const [product, setProduct] = useState<any>(null);
@@ -77,15 +75,15 @@ export default function DetailPage() {
     
     const [cookies, setCookies] = useCookies();
 
-    const{user} = useUserStore();
+    const { user } = useUserStore();
     // 장바구니 담기
-        const cartAdd = ()=>{
-            // 장바구니에 담을 때는 필요한 정보가 
-            // 유저 아이디 제품 시퀀스
-            // 유저 아이디는 userStore에서 가져오고
-            // 제품 시퀀스는 리스트에서 선택할때 pathVariavle로 가져옴
-            // const {productseq}=useParams();
-         const data = {
+    const cartAdd = () => {
+        // 장바구니에 담을 때는 필요한 정보가
+        // 유저 아이디 제품 시퀀스
+        // 유저 아이디는 userStore에서 가져오고
+        // 제품 시퀀스는 리스트에서 선택할때 pathVariavle로 가져옴
+        // const {productseq}=useParams();
+        const data = {
             // userId는 db에 저장된 그열을 다 가지고 오는건가? / productSeq도??
             cartUserId: user.userId,
             cartProductId: productSeq,
@@ -104,17 +102,16 @@ export default function DetailPage() {
      }
 
     const buyingHandler = () => {
-        setSelectProduct([{...product, cartProductAmount}]);
-    }
-
+        setSelectProduct([{ ...product, cartProductAmount }]);
+    };
 
     // 좋아요 클릭시 +1
     const Likepro = () => {
         const data = {
-
-            productSeq
-        }
-        axios.post(`http://localhost:4080/api/dtl/dtlLikePage`,data)
+            productSeq,
+        };
+        axios
+            .post(`http://localhost:4080/api/dtl/dtlLikePage`, data)
 
             .then((response) => {
                 const data = response.data;
@@ -243,21 +240,29 @@ export default function DetailPage() {
                                         <Box border={1} display={"flex"}>
                                             <Button
                                                 onClick={() => {
-
-                                                    setCartProductAmount(Math.max(cartProductAmount - 1, 0));
-
+                                                    setCartProductAmount(
+                                                        Math.max(
+                                                            cartProductAmount -
+                                                                1,
+                                                            0
+                                                        )
+                                                    );
                                                 }}
                                             >
                                                 <RemoveIcon fontSize='small' />
                                             </Button>
                                             <Box pl={3}>
-
-                                                <Badge badgeContent={cartProductAmount}></Badge>
+                                                <Badge
+                                                    badgeContent={
+                                                        cartProductAmount
+                                                    }
+                                                ></Badge>
                                             </Box>
                                             <Button
                                                 onClick={() => {
-                                                    setCartProductAmount(cartProductAmount + 1);
-
+                                                    setCartProductAmount(
+                                                        cartProductAmount + 1
+                                                    );
                                                 }}
                                             >
                                                 <AddIcon fontSize='small' />
@@ -295,9 +300,9 @@ export default function DetailPage() {
                             </Link>
                         </Box>
                         <Box border={1}>
-
-                            <Button onClick={()=>cartAdd()}>장바구니 담기</Button>
-
+                            <Button onClick={() => cartAdd()}>
+                                장바구니 담기
+                            </Button>
                         </Box>
                         <Box border={1} mr={3}>
                             <Button onClick={() => Likepro()}>좋아요</Button>
@@ -335,9 +340,7 @@ export default function DetailPage() {
                             </TabList>
                         </Box>
                         <TabPanel value='1'>
-                            <Box>
-                                <Typography>{productIntroduceDtl}</Typography>
-                            </Box>
+                            <Box component='img' src={productIntroduceDtl} />
                         </TabPanel>
                         <TabPanel value='2'>
                             <Box>Item Two</Box>
