@@ -28,6 +28,9 @@ export default function MainCarousel() {
             }
         })
     }, [])
+
+
+
   return (
     <Carousel>
         {

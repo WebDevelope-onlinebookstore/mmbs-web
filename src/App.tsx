@@ -20,6 +20,7 @@ import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
+import SearchAdd from "./pages/Search";
 import Review from "./pages/Review"
 import ResetPassword from "./pages/ResetPassword"
 
@@ -75,6 +76,7 @@ function App() {
                 <Route path='/findPassword' element={<FindPassword />} />
                 <Route path='/resetPassword' element={<ResetPassword />} />
                 <Route path='/review' element={<Review />} />
+                <Route path='/search/:productTitle' element={<SearchAdd />} />
             </Routes>
             {/* // component : 마이페이지 화면 */}
             {/* // component : ?? 화면 */}

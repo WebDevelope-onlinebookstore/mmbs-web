@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, KeyboardEvent, MouseEvent } from "react";
 
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -10,18 +10,35 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Popper from "@mui/material/Popper";
 import SearchIcon from "@mui/icons-material/Search";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import MenuComponent from "./components/MenuItem";
 import PoperMenuItem from "./components/PoperMenuItem";
 import { AGE_LIST, CATEGORY_LIST } from "../../constants/navigation";
+import axios from "axios";
+import { Button } from "@mui/material";
 
 export default function Navigation() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const [productTitle, setProductTitle] = useState<string>('');
+
+    // 리액트에서 URL을 옮길 때 사용되는 
+    const navigator = useNavigate();
+
+    const SearchAdd = () =>{
+        // SearchAdd 동작 시 '/search/:productTitle'로 이동
+        // productTitle에는 사용자가 검색창에 입력한 값이 담겨 있음
+        navigator(`/search/${productTitle}`);
+    }
+    // enter key 동작 
+    const handleKeyPress = (event: KeyboardEvent<HTMLElement>) => {
+        if(event.key === 'Enter') SearchAdd();
+      }
+
+    const handleClick = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(anchorEl ? null : event.currentTarget);
     };
-
     const open = Boolean(anchorEl);
     const id = open ? "simple-popper" : undefined;
     return (
@@ -70,12 +87,14 @@ export default function Navigation() {
                         <PoperMenuItem setAnchorEl={setAnchorEl} />
                     </Popper>
                     <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
+                            <IconButton onClick={SearchAdd}>
+                                <SearchIcon/>
+                            </IconButton>
                         <StyledInputBase
                             placeholder='Search…'
                             inputProps={{ "aria-label": "search" }}
+                            onChange={(e) => setProductTitle(e.target.value)}
+                            onKeyPress={(event) => handleKeyPress(event)}
                         />
                     </Search>
                 </Toolbar>
