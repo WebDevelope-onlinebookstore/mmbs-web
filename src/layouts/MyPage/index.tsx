@@ -5,7 +5,7 @@ import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import MyPageOrderInquiry from "../../pages/MyPageOrderInquiry";
 import Cart from "../../pages/Cart";
 
-export default function index() {
+export default function MyPage() {
   return (
     <>
       <UserPageLeftSide />

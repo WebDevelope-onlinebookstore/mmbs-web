@@ -52,50 +52,48 @@ export default function Header() {
             setState({ ...state, ["right"]: open });
         };
 
-    const { user, remobeUser } = useUserStore();
+    const { user } = useUserStore();
 
     const [cookies, setCookies] = useCookies();
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        remobeUser();
+        // remobeUser();
     };
 
     const list = () => (
-        <Box
-            sx={{ width: 250 }}
-            pt={4}
-            role='presentation'
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-        >
-            <Box display='flex' justifyContent='center'>
-                <TagFacesIcon />
-                <Typography variant='subtitle1' align='center' ml={1} mb={2}>
-                    안녕하세요.{" "}
-                    <Typography
-                        variant='subtitle1'
-                        component='span'
-                        fontWeight={800}
-                    >
-                        박준현
-                    </Typography>{" "}
-                    님
-                </Typography>
-            </Box>
+      <Box
+        sx={{ width: 250 }}
+        pt={4}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+      >
+        <Box display="flex" justifyContent="center">
+          <TagFacesIcon />
+          <Typography variant="subtitle1" align="center" ml={1} mb={2}>
+            안녕하세요.{" "}
+            <Typography variant="subtitle1" component="span" fontWeight={800}>
+              박준현
+            </Typography>{" "}
+            님
+          </Typography>
+        </Box>
         <Divider />
-        <Link to={"/orderInquiryPage"}>
+        <Link to={"/myPage"}>
           <Typography variant="subtitle1" m={2}>
             마이 페이지
           </Typography>
         </Link>
-        <Typography variant="subtitle1" m={2}>
-          주문 내역 조회
-        </Typography>
+        <Link to={"/orderInquiryPage"}>
+          <Typography variant="subtitle1" m={2}>
+            주문 내역 조회
+          </Typography>
+        </Link>
         <Link to={"/cart"}>
-            <Typography variant="subtitle1" m={2}>
-                장바구니
-            </Typography>
+          <Typography variant="subtitle1" m={2}>
+            장바구니
+          </Typography>
         </Link>
         <Typography variant="subtitle1" m={2}>
           리뷰 / 문의
@@ -110,8 +108,17 @@ export default function Header() {
             주문 결제 페이지
           </Typography>
         </Link>
+        <Link to={"/userAskList"}>
+          <Typography variant="subtitle1" m={2}>
+            회원 1 : 1 문의
+          </Typography>
+        </Link>
+        <Link to={"/userAskWrite"}>
+          <Typography variant="subtitle1" m={2}>
+            회원 1 : 1 문의 작성페이지
+          </Typography>
+        </Link>
       </Box>
-
     );
     
     return (

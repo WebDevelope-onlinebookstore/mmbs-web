@@ -21,6 +21,11 @@ import Cart from "./pages/Cart";
 import Review from "./pages/Review";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
+import MyPage from "./layouts/MyPage";
+import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
+import UserAskList from './pages/UserAsk/UserAskList';
+import UserAskWrite from './pages/UserAsk/UserAskWrite';
+
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
@@ -55,10 +60,7 @@ function App() {
                 {/* // component : 로그인 화면 */}
                 <Route path='/signup' element={<SignUp />} />
                 {/* // component : 마이페이지 화면 */}
-                <Route
-                    path='/orderInquiryPage'
-                    element={<MyPageOrderInquiry />}
-                />
+                
                 {/* // component : 회원정보수정 화면 */}
                 <Route path='/userUpdate' element={<UserUpdate />} />
                 {/* // component : 도서 목록 화면 */}
@@ -73,8 +75,16 @@ function App() {
                 <Route path='/findId' element={<FindId />} />
                 <Route path='/findPassword' element={<FindPassword />} />
                 <Route path='/review' element={<Review />} />
+                <Route path='/userAskList' element={<UserAskList />} />
+                <Route path='/userAskWrite' element={<UserAskWrite />} />
+                {/* // component : 마이페이지 화면 */}
+                <Route path='/myPage' element={<UserPageLeftSide />}>
+                    <Route index element={<MyPageOrderInquiry />} />
+                    <Route index element={<UserAskList />} />
+                    <Route index element={<UserAskWrite />} />
+                </Route>
             </Routes>
-            {/* // component : 마이페이지 화면 */}
+            
             {/* // component : ?? 화면 */}
             <Footer />
         </>

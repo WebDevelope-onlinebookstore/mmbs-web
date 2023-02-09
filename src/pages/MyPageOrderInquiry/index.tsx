@@ -69,59 +69,54 @@ export default function MyPageOrderInquiry() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }} display={"flex"} style={{ padding: "3vw" }}>
-        <UserPageLeftSide />
         <Box>
           <Box display={"flex"} justifyContent={"center"}>
             <Typography>마이페이지</Typography>
             <br />
             <Typography>주문 / 배송내역 조회</Typography>
           </Box>
-          {orderList.map(order => (
-            <Box
-            display={"flex"}
-            justifyContent={"center"}
-          >
-            <Card>
-              <CardContent>
-                <Box>
-                  <Box component="img" />
-                  <Typography padding={1}>{order.orderUserId}</Typography>
-                  <Box borderBottom={1} padding={1}>
-                    <Typography padding={1}>책 이름</Typography>
-                    <Typography padding={1}>주문상태</Typography>
-                    <Typography padding={1}>주문수량</Typography>
-                    <Typography padding={1}>주문일자</Typography>
-                    <Typography>{order.orderUserId}</Typography>
-                    <Typography>{order.orderUserPhone}</Typography>
-                    <Typography>{order.orderTotalPrice}</Typography>
-                    <Typography>{order.orderShipCompany}</Typography>
-                    <Typography>{order.orderNumber}</Typography>
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    justifyContent={"space-between"}
-                    borderBottom={1}
-                    padding={1}
-                  >
-                    <Typography padding={1}>상품가격</Typography>
-                    <Typography padding={1}>{}원</Typography>
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    justifyContent={"space-between"}
-                    borderBottom={1}
-                    padding={1}
-                  >
-                    <Typography padding={1}>책 가격</Typography>
-                    <Typography padding={1}>{}원</Typography>
-                  </Box>
+          {orderList.map((order) => (
+            <Box display={"flex"} justifyContent={"center"}>
+              <Card>
+                <CardContent>
                   <Box>
-                    <Gifts />
+                    <Box component="img" />
+                    <Box borderBottom={1} padding={1}>
+                      <Typography padding={1}>책 이름</Typography>
+                      <Typography padding={1}>주문상태</Typography>
+                      <Typography padding={1}>주문수량</Typography>
+                      <Typography padding={1}>주문일자</Typography>
+                      <Typography>{order.orderUserId}</Typography>
+                      <Typography>{order.orderUserPhone}</Typography>
+                      <Typography>{order.orderTotalPrice}</Typography>
+                      <Typography>{order.orderShipCompany}</Typography>
+                      <Typography>{order.orderNumber}</Typography>
+                    </Box>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      borderBottom={1}
+                      padding={1}
+                    >
+                      <Typography padding={1}>상품가격</Typography>
+                      <Typography padding={1}>{}원</Typography>
+                    </Box>
+                    <Box
+                      display={"flex"}
+                      justifyContent={"space-between"}
+                      borderBottom={1}
+                      padding={1}
+                    >
+                      <Typography padding={1}>책 가격</Typography>
+                      <Typography padding={1}>{}원</Typography>
+                    </Box>
+                    <Box>
+                      <Gifts />
+                    </Box>
                   </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </Box>
+                </CardContent>
+              </Card>
+            </Box>
           ))}
         </Box>
       </Box>

@@ -29,8 +29,9 @@ export default function OrderPage() {
   const [orderNumber, setOrderNumber] = useState<string>('');
   const [orderUserWhether, setOrderUserWhether] = useState<string>('');
   const [orderGuestPassword, setOrderGuestPassword] = useState<string>('');
+  const [orderGuestPasswordCheck, setOrderGuestPasswordCheck] = useState<string>('');
   const [orderUserId, setOrderUserId] = useState<string>('');
-  const [orderGiftCode, setOrderGiftCode] = useState('');
+  const [orderGiftCode, setOrderGiftCode] = useState<string>('');
   const [orderUserPhone, setOrderUserPhone] = useState<string>('');
   const [orderUserName, setOrderUserName] = useState<string>('');
   const [orderUserNameA, setOrderUserNameA] = useState<string>('');
@@ -77,10 +78,11 @@ export default function OrderPage() {
     console.log(selectProduct);
 
     const body = {
-      orderUserWhether: cookies !== null,
-      orderGuestPassword : user ? null : null,
+      orderUserWhether: user ? 1 : 0,
+      orderGuestPassword : user ? null : orderGuestPassword,
+      orderGuestPasswordCheck : user ? null : orderGuestPasswordCheck,
       orderUserId: user ? user.userId : null,
-      orderGiftCode,
+      orderGiftCode: user ? orderGiftCode : null,
       orderUserName,
       orderUserPhone,
       orderUserEmail,
@@ -95,7 +97,7 @@ export default function OrderPage() {
 
     axios
       .post("http://localhost:4080/api/pay/orderInsert", body
-      // , { headers: { Authorization: `Bearer ${cookies.token}`}}
+      , { headers: { Authorization: `Bearer ${cookies.token}`}}
       )
       .then((response) => {
         const data = response.data;
@@ -143,12 +145,12 @@ export default function OrderPage() {
               style={{ paddingTop: "2vw" }}
             >
               <CardContent>
-                { cookies.token && (
+                {cookies.token && (
                   <Box display={"flex"} borderBottom={1} padding={1}>
-                  <Typography padding={1}>성명</Typography>
-                  <Typography padding={1}>{orderUserNameA} 님</Typography>
-                </Box>
-                ) }
+                    <Typography padding={1}>성명</Typography>
+                    <Typography padding={1}>{orderUserNameA} 님</Typography>
+                  </Box>
+                )}
                 <TextField
                   fullWidth
                   label="주문자이름"
@@ -241,28 +243,35 @@ export default function OrderPage() {
                     <MenuItem value={40}>감사합니다 :p </MenuItem>
                   </Select>
                 </FormControl>
-                { cookies.token && (
-                <FormControl sx={{ m: 1, minWidth: "35vw", maxWidth: "40vw" }}>
-                  <InputLabel id="demo-simple-select-helper-label">
-                    사은품 선택
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-helper-label"
-                    id="demo-simple-select-helper"
-                    value={orderGiftCode}
-                    label="Select gift"
-                    onChange={handleChangeGift}
+                {!cookies.token ? (
+                  ""
+                ) : (
+                  <FormControl
+                    sx={{ m: 1, minWidth: "35vw", maxWidth: "40vw" }}
                   >
-                    <MenuItem>
-                      <em>사은품을 선택해주세요</em>
-                    </MenuItem>
-                    <MenuItem value={10}>고래밥</MenuItem>
-                    <MenuItem value={20}>꼬깔콘</MenuItem>
-                    <MenuItem value={30}>칙촉</MenuItem>
-                    <MenuItem value={40}>빼빼로</MenuItem>
-                  </Select>
-                </FormControl>
+                    <InputLabel id="demo-simple-select-helper-label">
+                      사은품 선택
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-helper-label"
+                      id="demo-simple-select-helper"
+                      value={orderGiftCode}
+                      label="Select gift"
+                      onChange={handleChangeGift}
+                    >
+                      <MenuItem>
+                        <em>사은품을 선택해주세요</em>
+                      </MenuItem>
+                      <MenuItem value={10}>고래밥</MenuItem>
+                      <MenuItem value={20}>꼬깔콘</MenuItem>
+                      <MenuItem value={30}>칙촉</MenuItem>
+                      <MenuItem value={40}>빼빼로</MenuItem>
+                    </Select>
+                  </FormControl>
                 )}
+                {/* { cookies.token && (
+                
+                )} */}
               </CardContent>
             </Card>
           </Box>
@@ -342,6 +351,55 @@ export default function OrderPage() {
           </Card>
         </Box>
       </Box>
+      {!cookies.token ? (
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          style={{ paddingTop: "2vw" }}
+        >
+          <Card style={{ paddingTop: "2vw" }}>
+            <Box>
+              <Typography padding={1}>
+                {" "}
+                - 비회원 주문 비밀번호 설정 -{" "}
+              </Typography>
+              <Typography padding={1}>
+                비밀번호는 “주문 확인”시 필수기재 사항으로 반드시 기억하셔야
+                합니다.
+              </Typography>
+              <Typography padding={1}>
+                비밀번호는 숫자+영문 조합하여 4자리 이상으로 입력하세요.
+              </Typography>
+              <CardActions>
+                <Typography padding={1}> 비회원 주문 비밀번호 : </Typography>
+                <TextField
+                  label="비회원 주문 비밀번호"
+                  type="password"
+                  variant="standard"
+                  value={orderGuestPassword}
+                  onChange={(e) => setOrderGuestPassword(e.target.value)}
+                />
+              </CardActions>
+              <CardActions>
+                <Typography padding={1}>
+                  {" "}
+                  비회원 주문 비밀번호 확인 :{" "}
+                </Typography>
+                <TextField
+                  label="비회원 주문 비밀번호 확인"
+                  type="password"
+                  variant="standard"
+                  value={orderGuestPasswordCheck}
+                  onChange={(e) => setOrderGuestPasswordCheck(e.target.value)}
+                />
+              </CardActions>
+            </Box>
+          </Card>
+        </Box>
+      ) : (
+        " "
+      )}
+
       <Box display={"flex"} justifyContent={"center"}>
         <CardActions sx={{ minWidth: "60vw" }} style={{ paddingTop: "2vw" }}>
           <Button
