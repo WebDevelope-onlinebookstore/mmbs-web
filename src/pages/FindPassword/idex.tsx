@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import {Card, CardContent,TextField, CardActions,Button, Box} from '@mui/material';
-import { sign } from 'crypto';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { error } from 'console';
 import { useCookies } from 'react-cookie';
-import { useUserStore } from '../../stores';
+import { useFindIdStore, useUserStore } from '../../stores';
 
 export default function FindPassword() {
     const [userId, setId] = useState<string>('');
     const [userName, setName] = useState<string>('');
     const [userEmail, setEmail] = useState<string>('');
     const [cookies, setCookies]=useCookies();
+
     const {user,setUser} = useUserStore();
+    const {userFindId, setFindId} = useFindIdStore();
+
+    const navigator = useNavigate();
 
     const findIdHandeler =() => {
         if(userId.length === 0 ||userName.length === 0 || userEmail.length ===0){
@@ -26,19 +30,12 @@ export default function FindPassword() {
         axios.post("http://localhost:4080/api/auth/findPassword", data)
         .then((response)=>{
             const responseData = response.data;
-            console.log(responseData)
             if(!responseData.result){
                 alert('비밀번호를 찾을 수 없습니다.')
                 return;
             }
-            const {token, exprTime, user}=responseData.data;
-            const expires = new Date();
-            expires.setMilliseconds(expires.getMilliseconds+exprTime);
-            setCookies('token',token,{expires});
-            setUser(user);
-            alert(cookies.token);
-            
-            
+            setFindId(userId);
+            navigator('/resetPassword')
         })
         .catch((error)=>{
             alert('비밀번호 찾기에 실패하였습니다.')
