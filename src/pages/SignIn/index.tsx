@@ -5,12 +5,13 @@ import axios from 'axios';
 import { error } from 'console';
 import { useCookies } from 'react-cookie';
 import { useUserStore } from '../../stores';
+import { useNavigate } from 'react-router-dom';
 
 export default function SingIn() {
     const [userId, setUserId] = useState<string>('');
     const [userPassword, setUserPassword] = useState<string>('');
     const [cookies, setCookies] = useCookies();
-
+    const navigator = useNavigate();
     const {user, setUser} = useUserStore();
     
     const signInHandeler =() => {
@@ -70,6 +71,23 @@ export default function SingIn() {
               variant="contained"
             >
               로그인
+            </Button>
+         
+            <Button
+              fullWidth
+              onClick={() => navigator('/findId')}
+              
+              variant="contained"
+            >
+              아이디 찾기
+            </Button>
+    
+            <Button
+              fullWidth
+              onClick={() =>  navigator('/findPassword')}
+              variant="contained"
+            >
+              비밀번호 찾기
             </Button>
           </Box>
           <Box component="div" display="flex" mt={2}>
