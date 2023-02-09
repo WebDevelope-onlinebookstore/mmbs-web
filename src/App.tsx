@@ -72,26 +72,18 @@ function App() {
           />
           {/* // component : 주문 결제 화면 */}
           <Route path="/orderPayment" element={<OrderPage />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/findId' element={<FindId />} />
+                <Route path='/findPassword' element={<FindPassword />} />
+                <Route path='/resetPassword' element={<ResetPassword />} />
+                <Route path='/review' element={<Review />} />
+                <Route path='/search/:productTitle' element={<SearchAdd />} />
+            </Routes>
+            {/* // component : 마이페이지 화면 */}
+            {/* // component : ?? 화면 */}
+            <Footer />
+        </>
 
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/findId" element={<FindId />} />
-          <Route path="/findPassword" element={<FindPassword />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/userAskList" element={<UserAskList />} />
-          <Route path="/userAskWrite" element={<UserAskWrite />} />
-          {/* // component : 마이페이지 화면 */}
-          <Route path="/myPage" element={<UserPageLeftSide />}>
-            <Route index element={<MyPageOrderInquiry />} />
-            {/* <Route index element={<UserAskList />} />
-                    <Route index element={<UserAskWrite />} /> */}
-          </Route>
-          <Route path="/search/:productTitle" element={<SearchAdd />} />
-        </Routes>
-
-        {/* // component : ?? 화면 */}
-        <Footer />
-      </>
     );
 }
 export default App;
