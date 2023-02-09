@@ -3,7 +3,6 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { AGE_LIST, CATEGORY_LIST } from "../../../../constants/navigation";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 
 interface Props {
     setAnchorEl: (parameter: null | HTMLElement) => void;

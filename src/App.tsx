@@ -21,7 +21,6 @@ import Cart from "./pages/Cart";
 import Review from "./pages/Review";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
-import Review from "./pages/Review"
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
