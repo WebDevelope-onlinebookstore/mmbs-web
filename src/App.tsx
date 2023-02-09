@@ -24,6 +24,11 @@ import SearchAdd from "./pages/Search";
 import Review from "./pages/Review"
 import ResetPassword from "./pages/ResetPassword"
 
+import MyPage from "./layouts/MyPage";
+import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
+import UserAskList from './pages/UserAsk/UserAskList';
+import UserAskWrite from './pages/UserAsk/UserAskWrite';
+
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
 function App() {
@@ -45,32 +50,28 @@ function App() {
 
     const [tmp, setTmp] = useState<number>(0);
     return (
-        <>
-            <Header />
-            <Navigation />
-            <Routes>
-                {/* // component : Main 화면 */}
-                <Route path='/' element={<Main />} />
-                {/* // component : 회원가입 화면 */}
-                <Route path='/dtlpage/:productSeq' element={<DtlPage />} />
-                <Route path='/signIn' element={<SignIn />} />
-                {/* // component : 로그인 화면 */}
-                <Route path='/signup' element={<SignUp />} />
-                {/* // component : 마이페이지 화면 */}
-                <Route
-                    path='/orderInquiryPage'
-                    element={<MyPageOrderInquiry />}
-                />
-                {/* // component : 회원정보수정 화면 */}
-                <Route path='/userUpdate' element={<UserUpdate />} />
-                {/* // component : 도서 목록 화면 */}
-                <Route
-                    path='/bookList/:productGenre/:productSubGenre'
-                    element={<국내도서 />}
-                />
-                {/* // component : 주문 결제 화면 */}
-                <Route path='/orderPayment' element={<OrderPage />} />
+      <>
+        <Header />
+        <Navigation />
+        <Routes>
+          {/* // component : Main 화면 */}
+          <Route path="/" element={<Main />} />
+          {/* // component : 회원가입 화면 */}
+          <Route path="/dtlpage/:productSeq" element={<DtlPage />} />
+          <Route path="/signIn" element={<SignIn />} />
+          {/* // component : 로그인 화면 */}
+          <Route path="/signup" element={<SignUp />} />
+          {/* // component : 마이페이지 화면 */}
 
+          {/* // component : 회원정보수정 화면 */}
+          <Route path="/userUpdate" element={<UserUpdate />} />
+          {/* // component : 도서 목록 화면 */}
+          <Route
+            path="/bookList/:productGenre/:productSubGenre"
+            element={<국내도서 />}
+          />
+          {/* // component : 주문 결제 화면 */}
+          <Route path="/orderPayment" element={<OrderPage />} />
                 <Route path='/cart' element={<Cart />} />
                 <Route path='/findId' element={<FindId />} />
                 <Route path='/findPassword' element={<FindPassword />} />
@@ -82,6 +83,7 @@ function App() {
             {/* // component : ?? 화면 */}
             <Footer />
         </>
+
     );
 }
 export default App;
