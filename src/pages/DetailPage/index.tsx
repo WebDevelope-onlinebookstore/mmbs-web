@@ -25,6 +25,8 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { useSelectProductStore, useUserStore } from 'src/stores';
 
+import { useCookies } from "react-cookie"; 
+
 export default function DetailPage() {
     // userStore에서 user정보 가져온다
     // user정보는 login 할때 userStore에 저장
@@ -72,6 +74,8 @@ export default function DetailPage() {
     const [cartProductPrice,setCartProductPrice]=useState<string>('');
     const [cartProductAmount,setCartProductAmount]=useState<number>(1);
     const [cartUserId,setCartUserId]=useState<string>('');
+    
+    const [cookies, setCookies] = useCookies();
 
     const{user} = useUserStore();
     // 장바구니 담기
@@ -87,7 +91,9 @@ export default function DetailPage() {
             cartProductId: productSeq,
             cartProductAmount,  
          }
-         axios.post(`http://localhost:4080/api/cart/cartInsert`,data)
+        //  $가 뭘까요?
+         axios.post(`http://localhost:4080/api/cart/cartInsert`,data,{
+            headers:{Authorization: `Bearer ${cookies.token}`}})
              .then((response)=>{
                  const data = response.data;
                  if(data.data){

@@ -8,6 +8,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 import { useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 interface Prop {
     num: number;
@@ -22,7 +23,7 @@ interface UserStore {
 const useStore = create<UserStore>((set) => ({
     user: null,
     setUser: (user: any) => {
-        set((state) => ({ ...StaticRange, user }));
+        set((state) => ({ ...state, user }));
     },
     remobeUser: () => {
         set((state) => ({ ...state, user: null }));
@@ -39,6 +40,28 @@ export default function Header() {
         right: false,
     });
 
+
+
+    // const [userName,setUserName] = useState<string>('');
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4080/api/user/`, {
+    //       headers: {
+    //         Authorization: `Bearer ${cookies.token}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       const data = response.data;
+    //       const result = data.result;
+    //       console.log(result);
+    //       if (!result) alert(data.message)
+    //       else {
+    //         setUserName(data.data.userName);
+    //       }
+    //     })
+    //   }, []);
+
+      
+
     const toggleDrawer =
         (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
             if (
@@ -53,6 +76,7 @@ export default function Header() {
         };
 
     const { user, remobeUser } = useUserStore();
+    
 
     const [cookies, setCookies] = useCookies();
 
@@ -61,6 +85,7 @@ export default function Header() {
         remobeUser();
     };
 
+    
     const list = () => (
         <Box
             sx={{ width: 250 }}

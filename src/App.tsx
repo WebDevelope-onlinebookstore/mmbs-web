@@ -21,7 +21,7 @@ import Cart from "./pages/Cart";
 import Review from "./pages/Review";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
-import Review from "./pages/Review"
+import SearchAdd from "./pages/Search";
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
@@ -74,6 +74,7 @@ function App() {
                 <Route path='/findId' element={<FindId />} />
                 <Route path='/findPassword' element={<FindPassword />} />
                 <Route path='/review' element={<Review />} />
+                <Route path='/search/:productTitle' element={<SearchAdd />} />
             </Routes>
             {/* // component : 마이페이지 화면 */}
             {/* // component : ?? 화면 */}
