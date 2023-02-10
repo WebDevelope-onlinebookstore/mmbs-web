@@ -40,7 +40,7 @@ export default function UserAskUpdate() {
       askContent,
     };
     axios
-    .post("http://localhost:4080/api/ask/askWrite", data, {
+    .post("http://localhost:4080/api/ask/userAskUpdate/save", data, {
       headers: { Authorization: `Bearer ${cookies.token}`}})
     .then((response) => {
       const data = response.data;
