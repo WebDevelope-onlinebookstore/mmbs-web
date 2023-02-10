@@ -262,10 +262,10 @@ export default function OrderPage() {
                       <MenuItem>
                         <em>사은품을 선택해주세요</em>
                       </MenuItem>
-                      <MenuItem value={10}>고래밥</MenuItem>
-                      <MenuItem value={20}>꼬깔콘</MenuItem>
-                      <MenuItem value={30}>칙촉</MenuItem>
-                      <MenuItem value={40}>빼빼로</MenuItem>
+                      <MenuItem value={1}>스폰지밥</MenuItem>
+                      <MenuItem value={2}>뚱이</MenuItem>
+                      <MenuItem value={3}>징징이</MenuItem>
+                      <MenuItem value={4}>집게사장</MenuItem>
                     </Select>
                   </FormControl>
                 )}

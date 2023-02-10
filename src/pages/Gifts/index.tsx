@@ -6,20 +6,24 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Autocomplete from '@mui/material/Autocomplete';
+
+import { useCookies } from "react-cookie"; 
 import axios from 'axios';
 
-// interface Props {
-//     orderNumber: number;
-// }
+interface Props {
+    orderNumber: string;
+}
 
 
-export default function Gifts() {
+export default function Gifts({ orderNumber }: Props) {
   // export default function Gifts({orderNumber}: Props) {
 
   const [giftList, setGiftList] = useState<any[]>([]);
   const [giftNameList, setGiftNameList] = useState<string[]>([]);
   const [gift, setGift] = useState<any>(null);
-  const [giftCodes, setGiftCodes] = useState<number>(0);
+  const [orderGiftCode, setorderGiftCode] = useState<number>(0);
+  
+  const [cookies, setCookies] = useCookies();
 
   // 변경하기 클릭하면 db에 giftcode에 들어가게하는방법
   // const abs = () => {
@@ -37,7 +41,8 @@ export default function Gifts() {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:4080/api/auth/gift`)
+    axios.get(`http://localhost:4080/api/auth/gift`,
+    {headers:{Authorization: `Bearer ${cookies.token}`}})
       .then((response) => {
         const data = response.data;
         const result = data.result;
@@ -55,13 +60,20 @@ export default function Gifts() {
       })
       .catch((error) => { '에러' });
   }, [])
+
+
+  // 사은품 변경
   const giftAdd = () => {
     const data = {
-      selectGiftHandler
+      orderGiftCode: gift.giftCode,
+      orderNumber 
     }
-    axios.post(`http://localhost:4080/api/auth/giftorder`, data)
+    axios.post(`http://localhost:4080/api/auth/giftorder`, data,
+    {headers:{Authorization: `Bearer ${cookies.token}`}})
+    .then((response)=>{
+      const data = response.data;
 
-
+    })
 
   }
 
@@ -101,28 +113,11 @@ export default function Gifts() {
                   renderInput={(params) => <TextField {...params} label="사은품 선택하기" />}
                 />
                 <Box display={'flex'} pt={5} justifyContent={'center'}>
-                  <Button onClick={giftAdd}>변경하기</Button>
+                  <Button onClick={giftAdd}>변경하기1</Button>
                 </Box>
               </Box>
             </Box>
             <br />
-            <Autocomplete
-              onChange={(event: any, newValue: string | null) => {
-                selectGiftHandler(newValue);
-              }}
-              onInputChange={(event, newInputValue) => {
-                selectGiftHandler(newInputValue);
-              }}
-              id="controllable-states-demo"
-              options={giftNameList}
-              sx={{ width: 300 }}
-              renderInput={(params) => (
-                <TextField {...params} label="사은품 선택하기" />
-              )}
-            />
-            <Box display={"flex"} pt={5} justifyContent={"center"}>
-              <Button>변경하기</Button>
-            </Box>
           </AccordionDetails>
         </Accordion >
       </Box >

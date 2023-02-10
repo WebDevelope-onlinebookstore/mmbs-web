@@ -40,28 +40,6 @@ export default function Header() {
         right: false,
     });
 
-
-
-    // const [userName,setUserName] = useState<string>('');
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4080/api/user/`, {
-    //       headers: {
-    //         Authorization: `Bearer ${cookies.token}`,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       const data = response.data;
-    //       const result = data.result;
-    //       console.log(result);
-    //       if (!result) alert(data.message)
-    //       else {
-    //         setUserName(data.data.userName);
-    //       }
-    //     })
-    //   }, []);
-
-      
-
     const toggleDrawer =
         (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
             if (
@@ -82,7 +60,7 @@ export default function Header() {
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        // remobeUser();
+        remobeUser();
     };
 
     
@@ -99,7 +77,7 @@ export default function Header() {
           <Typography variant="subtitle1" align="center" ml={1} mb={2}>
             안녕하세요.{" "}
             <Typography variant="subtitle1" component="span" fontWeight={800}>
-              박준현
+            {user != null && <>{user.userName}</>}
             </Typography>{" "}
             님
           </Typography>
