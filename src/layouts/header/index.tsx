@@ -64,7 +64,6 @@ export default function Header() {
     };
 
     const list = () => (
-<<<<<<< HEAD
       <Box
         sx={{ width: 250 }}
         pt={4}
@@ -127,69 +126,6 @@ export default function Header() {
           </Typography>
         </Link>
       </Box>
-=======
-        <Box
-            sx={{ width: 250 }}
-            pt={4}
-            role='presentation'
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
-        >
-            <Box display='flex' justifyContent='center'>
-                <TagFacesIcon />
-                <Typography variant='subtitle1' align='center' ml={1} mb={2}>
-                    안녕하세요.{" "}
-                    <Typography
-                        variant='subtitle1'
-                        component='span'
-                        fontWeight={800}
-                    >
-                        {user != null && <>{user.userName}</>}
-                    </Typography>{" "}
-                    님
-                </Typography>
-            </Box>
-            <Divider />
-            <Link to={"/myPage"}>
-                <Typography variant='subtitle1' m={2}>
-                    마이 페이지
-                </Typography>
-            </Link>
-            <Link to={"/orderInquiryPage"}>
-                <Typography variant='subtitle1' m={2}>
-                    주문 내역 조회
-                </Typography>
-            </Link>
-            <Link to={"/cart"}>
-                <Typography variant='subtitle1' m={2}>
-                    장바구니
-                </Typography>
-            </Link>
-            <Typography variant='subtitle1' m={2}>
-                리뷰 / 문의
-            </Typography>
-            <Link to={"/userUpdate"}>
-                <Typography variant='subtitle1' m={2}>
-                    회원정보수정
-                </Typography>
-            </Link>
-            <Link to={"/orderPayment"}>
-                <Typography variant='subtitle1' m={2}>
-                    주문 결제 페이지
-                </Typography>
-            </Link>
-            <Link to={"/userAskList"}>
-                <Typography variant='subtitle1' m={2}>
-                    회원 1 : 1 문의
-                </Typography>
-            </Link>
-            <Link to={"/userAskWrite"}>
-                <Typography variant='subtitle1' m={2}>
-                    회원 1 : 1 문의 작성페이지
-                </Typography>
-            </Link>
-        </Box>
->>>>>>> 1f340a2b0e4a4fa263b38d8ebbb614fffa470940
     );
 
     return (
