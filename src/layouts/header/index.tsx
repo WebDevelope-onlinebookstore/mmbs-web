@@ -82,7 +82,7 @@ export default function Header() {
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        // remobeUser();
+       remobeUser();
     };
 
     
