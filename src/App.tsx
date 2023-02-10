@@ -16,6 +16,7 @@ import 국내도서 from "./pages/bookList/category/국내도서";
 import OrderPage from "./pages/Payment";
 import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
+import OrderList from "./pages/OrderList";
 import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
 import SearchAdd from "./pages/Search";
@@ -65,6 +66,7 @@ function App() {
           />
           {/* // component : 주문 결제 화면 */}
           <Route path="/orderPayment" element={<OrderPage />} />
+          <Route path="/orderList" element={<OrderList />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/findId" element={<FindId />} />
           <Route path="/findPassword" element={<FindPassword />} />
