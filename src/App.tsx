@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { useEffect } from "react";
-
 import Header from "./layouts/header";
 import Main from "./layouts/main";
 import Navigation from "./layouts/navigation";
@@ -23,7 +21,6 @@ import FindPassword from "./pages/FindPassword/idex";
 import SearchAdd from "./pages/Search";
 import Review from "./pages/Review"
 import ResetPassword from "./pages/ResetPassword"
-
 import MyPage from "./layouts/MyPage";
 import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import UserAskList from './pages/UserAsk/UserAskList';
@@ -44,11 +41,9 @@ function App() {
                 setConnection(error.message);
             });
     };
-
     useEffect(() => {
         connectionTest();
     }, []);
-
     const [tmp, setTmp] = useState<number>(0);
     return (
       <>
@@ -63,7 +58,6 @@ function App() {
           {/* // component : 로그인 화면 */}
           <Route path="/signup" element={<SignUp />} />
           {/* // component : 마이페이지 화면 */}
-
           {/* // component : 회원정보수정 화면 */}
           <Route path="/userUpdate" element={<UserUpdate />} />
           {/* // component : 도서 목록 화면 */}
@@ -73,7 +67,6 @@ function App() {
           />
           {/* // component : 주문 결제 화면 */}
           <Route path="/orderPayment" element={<OrderPage />} />
-
           <Route path="/cart" element={<Cart />} />
           <Route path="/findId" element={<FindId />} />
           <Route path="/findPassword" element={<FindPassword />} />
@@ -90,7 +83,6 @@ function App() {
           </Route>
           <Route path="/search/:productTitle" element={<SearchAdd />} />
         </Routes>
-
         {/* // component : ?? 화면 */}
         <Footer />
       </>

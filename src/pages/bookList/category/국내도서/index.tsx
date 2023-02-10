@@ -85,7 +85,7 @@ function BookList() {
                         <div className='list-container'>
                             <div className='list-img'>
                                 <div className='imgtle'>
-                                    <Link to={`/dtlPage/${item.productSeq}`}>
+                                    <Link to={`/DtlPage/${item.productSeq}`}>
                                         <img
                                             className='book-img'
                                             src={item.productImageUrl}

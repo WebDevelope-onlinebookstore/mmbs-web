@@ -94,7 +94,7 @@ export default function MyPageOrderInquiry() {
                     <Box display={"flex"} justifyContent={"center"}>
                         <Typography>마이페이지</Typography>
                         <br />
-                        <form
+                        {/* <form
                             action='http://info.sweettracker.co.kr/tracking/5'
                             method='post'
                         >
@@ -115,12 +115,12 @@ export default function MyPageOrderInquiry() {
                                 id='t_invoice'
                                 name='t_invoice'
                                 value='1234567890'
-                            />
+                            /> */}
                             <button>주문 / 배송내역 조회</button>
                             {/* <Typography onClick={() => checkDelivery()}>
                                 주문 / 배송내역 조회
                             </Typography> */}
-                        </form>
+                        {/* </form> */}
                     </Box>
                     {orderList.map((order) => (
                         <Box display={"flex"} justifyContent={"center"}>

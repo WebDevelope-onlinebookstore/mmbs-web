@@ -5,6 +5,7 @@ import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Carousel from 'react-material-ui-carousel'
+import { Link } from 'react-router-dom'
 
 import SampleImg from '../../../assets/images/XL.jpeg'
 
@@ -57,10 +58,11 @@ function PaperItem({item}: any) {
     return (
         <Card>
             <Box width='12.5vw'>
+            <Link to={`/DtlPage/${item.productSeq}`}>
                 <Box component='img' src={item.productImageUrl} width='100%'></Box>
                 <Typography m={1} fontWeight="900">{item.productTitle}</Typography>
                 <Typography m={1} fontWeight="700" color="#999999">{item.productWriter}</Typography>
-                <Typography m={1} fontWeight="900">{item.productPrice}원</Typography>
+                <Typography m={1} fontWeight="900">{item.productPrice}원</Typography> </Link>
             </Box>
         </Card>
     )
