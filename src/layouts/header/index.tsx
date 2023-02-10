@@ -82,7 +82,7 @@ export default function Header() {
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        // remobeUser();
+        remobeUser();
     };
 
     
@@ -99,7 +99,7 @@ export default function Header() {
           <Typography variant="subtitle1" align="center" ml={1} mb={2}>
             안녕하세요.{" "}
             <Typography variant="subtitle1" component="span" fontWeight={800}>
-              박준현
+                {user != null && <>{user.userName}</>}
             </Typography>{" "}
             님
           </Typography>
@@ -141,6 +141,11 @@ export default function Header() {
         <Link to={"/userAskWrite"}>
           <Typography variant="subtitle1" m={2}>
             회원 1 : 1 문의 작성페이지
+          </Typography>
+        </Link>
+        <Link to={"/userAskUpdate/:askId"}>
+          <Typography variant="subtitle1" m={2}>
+            회원 1 : 1 문의 수정페이지
           </Typography>
         </Link>
       </Box>

@@ -9,22 +9,23 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie"; 
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useUserStore } from 'src/stores';
 
-export default function UserAskWrite() {
+export default function UserAskUpdate() {
+  const { askId } = useParams();
 
   const [cookies, setCookies] = useCookies();
 
+  // const [askId, setAskId] = useState<string>('');
   const [askWriter, setAskWriter] = useState<string>('');
   const [askSort, setAskSort] = useState<string>('');
+  const [askTitle, setAskTitle] = useState<string>('');
   const [askContent, setAskContent] = useState<string>('');
 
   const [userName, setUserName] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
-
-  const { user } = useUserStore();
 
   const handleChangeAskSort = (event: SelectChangeEvent) => {
     setAskSort(event.target.value as string);
@@ -32,8 +33,10 @@ export default function UserAskWrite() {
 
   const askWriteHandler = () => {
     const data = {
-      askWriter : user.userId,
+      askId,
+      askWriter,
       askSort,
+      askTitle,
       askContent,
     };
     axios
@@ -43,13 +46,14 @@ export default function UserAskWrite() {
       const data = response.data;
       const result = data.result;
       console.log(result);
+      alert("1 : 1 문의 수정을 정상적으로 완료하였습니다.");
       if (!result) alert(data.message)
     })
     .catch((error) => {});
   };
 
   useEffect(() => {
-    axios.get(`http://localhost:4080/api/user/`, {
+    axios.get(`http://localhost:4080/api/ask/userAskUpdate/${askId}`, {
       headers: {
         Authorization: `Bearer ${cookies.token}`,
       },
@@ -60,9 +64,10 @@ export default function UserAskWrite() {
       console.log(result);
       if (!result) alert(data.message)
       else {
-        setUserName(data.data.userName);
-        setUserEmail(data.data.userEmail);
-        setUserPhone(data.data.userPhone);
+        setAskWriter(data.data.askWriter);
+        setAskSort(data.data.askSort);
+        setAskTitle(data.data.askTitle);
+        setAskContent(data.data.askContent);
       }
     })
   }, []);
@@ -74,7 +79,7 @@ export default function UserAskWrite() {
           마이페이지
         </Typography>
         <Typography align="center" fontSize={"25px"}>
-          1 : 1 문의
+          1 : 1 문의 수정
         </Typography>
       </Box>
       <Box
@@ -124,7 +129,7 @@ export default function UserAskWrite() {
                         onChange={handleChangeAskSort}
                       >
                         <MenuItem>
-                          <em>사은품을 선택해주세요</em>
+                          <em>문의 유형을 선택해주세요</em>
                         </MenuItem>
                         <MenuItem value={"제품 문의"}>제품 문의</MenuItem>
                         <MenuItem value={"주문 / 결제 문의"}>주문 / 결제 문의</MenuItem>
@@ -141,18 +146,16 @@ export default function UserAskWrite() {
                   sx={{ minWidth: "55vw" }}
                 >
                   <Box padding={1} sx={{ minWidth: "8vw" }}>
-                    문의 내용
+                    문의 제목
                   </Box>
                   <Box sx={{ flexGrow: 1 }}>
                     <TextField
                       id="filled-multiline-flexible"
-                      label="최대 1,000자 이내로 작성해주세요"
-                      multiline
+                      label="문의 제목을 입력해주세요"
                       fullWidth
-                      maxRows={5}
-                      variant="filled"
-                      value={askContent}
-                      onChange={(e) => setAskContent(e.target.value)}
+                      value={askTitle}
+                      onChange={(e) => setAskTitle(e.target.value)}
+                      inputProps={{ maxLength: 10 }}
                     />
                   </Box>
                 </Box>
@@ -164,55 +167,19 @@ export default function UserAskWrite() {
                   sx={{ minWidth: "55vw" }}
                 >
                   <Box padding={1} sx={{ minWidth: "8vw" }}>
-                    이름
+                    문의 내용
                   </Box>
-                  <Box
-                    sx={{ flexGrow: 1 }}
-                    justifyContent={"center"}
-                    alignContent={"center"}
-                  >
-                    {userName}
-                  </Box>
-                </Box>
-                <Box
-                  display={"flex"}
-                  borderBottom={1}
-                  padding={1}
-                  margin={1}
-                  sx={{ minWidth: "55vw" }}
-                >
-                  <Box padding={1} sx={{ minWidth: "8vw" }}>
-                    이메일 주소
-                  </Box>
-                  <Box sx={{ flexGrow: 1, maxWidth: "15vw" }}>
-                    <Box>
-                      <TextField
-                        fullWidth
-                        type="email"
-                        variant="standard"
-                        value={userEmail}
-                        onChange={(e) => setUserEmail(e.target.value)}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  display={"flex"}
-                  borderBottom={1}
-                  padding={1}
-                  margin={1}
-                  sx={{ minWidth: "55vw" }}
-                >
-                  <Box padding={1} sx={{ minWidth: "8vw" }}>
-                    휴대폰 번호
-                  </Box>
-                  <Box sx={{ flexGrow: 1, maxWidth: "15vw" }}>
+                  <Box sx={{ flexGrow: 1 }}>
                     <TextField
+                      id="filled-multiline-flexible"
+                      label="최대 200자 이내로 작성해주세요"
+                      multiline
                       fullWidth
-                      type="phone"
-                      variant="standard"
-                      value={userPhone}
-                      onChange={(e) => setUserPhone(e.target.value)}
+                      maxRows={5}
+                      variant="filled"
+                      value={askContent}
+                      onChange={(e) => setAskContent(e.target.value)}
+                      inputProps={{ maxLength: 200 }}
                     />
                   </Box>
                 </Box>
@@ -224,7 +191,7 @@ export default function UserAskWrite() {
       <Box display={"flex"} justifyContent={"center"}>
         <CardActions sx={{ minWidth: "60vw" }} style={{ paddingTop: "2vw" }}>
           <Link to={"/userAskList"}>
-            <Button onClick={() => askWriteHandler()}>수정</Button>
+            <Button onClick={() => askWriteHandler()}>문의 변경</Button>
           </Link>
           <Link to={"userAskMain"}>
             <Button>취소</Button>
