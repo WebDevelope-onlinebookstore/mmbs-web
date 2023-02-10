@@ -22,8 +22,7 @@ export default function MyPageOrderInquiry() {
     const [giftCode, setGiftCode] = useState<string>("");
     const [orderUserName, setOrderUserName] = useState<string>("");
     const [orderUserPhone, setOrderUserPhone] = useState<string>("");
-    const [orderShipAddressDetail, setOrderUseOrderShipAddressDetail] =
-        useState<string>("");
+    const [orderShipAddressDetail, setOrderUseOrderShipAddressDetail] = useState<string>("");
     const [orderTotalPrice, setOrderTotalPrice] = useState<number>(0);
     const [orderStatus, setOrderStatus] = useState<number>(0);
     const [orderShipCompany, setOrderShipCompany] = useState<string>("");

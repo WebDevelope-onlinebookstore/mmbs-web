@@ -18,6 +18,7 @@ export default function UserAskWrite() {
 
   const [askWriter, setAskWriter] = useState<string>('');
   const [askSort, setAskSort] = useState<string>('');
+  const [askTitle, setAskTitle] = useState<string>('');
   const [askContent, setAskContent] = useState<string>('');
 
   const [userName, setUserName] = useState<string>('');
@@ -34,6 +35,7 @@ export default function UserAskWrite() {
     const data = {
       askWriter : user.userId,
       askSort,
+      askTitle,
       askContent,
     };
     axios
@@ -43,6 +45,7 @@ export default function UserAskWrite() {
       const data = response.data;
       const result = data.result;
       console.log(result);
+      alert("1 : 1 문의 접수를 정상적으로 완료하였습니다.");
       if (!result) alert(data.message)
     })
     .catch((error) => {});
@@ -141,18 +144,40 @@ export default function UserAskWrite() {
                   sx={{ minWidth: "55vw" }}
                 >
                   <Box padding={1} sx={{ minWidth: "8vw" }}>
+                    문의 제목
+                  </Box>
+                  <Box sx={{ flexGrow: 1 }}>
+                    <TextField
+                      id="filled-multiline-flexible"
+                      label="문의 제목을 입력해주세요"
+                      fullWidth
+                      value={askTitle}
+                      onChange={(e) => setAskTitle(e.target.value)}
+                      inputProps={{ maxLength: 10 }}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  display={"flex"}
+                  borderBottom={1}
+                  padding={1}
+                  margin={1}
+                  sx={{ minWidth: "55vw" }}
+                >
+                  <Box padding={1} sx={{ minWidth: "8vw" }}>
                     문의 내용
                   </Box>
                   <Box sx={{ flexGrow: 1 }}>
                     <TextField
                       id="filled-multiline-flexible"
-                      label="최대 1,000자 이내로 작성해주세요"
+                      label="최대 100자 이내로 작성해주세요"
                       multiline
                       fullWidth
                       maxRows={5}
                       variant="filled"
                       value={askContent}
                       onChange={(e) => setAskContent(e.target.value)}
+                      inputProps={{ maxLength: 100 }}
                     />
                   </Box>
                 </Box>

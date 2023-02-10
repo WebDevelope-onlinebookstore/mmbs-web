@@ -24,6 +24,7 @@ export default function UserAskList() {
   const [askId, setAskId] = useState<number>(0);
   const [askWriter, setAskWriter] = useState<string>('');
   const [askSort, setAskSort] = useState<string>('');
+  const [askTitle, setAskTitle] = useState<string>('');
   const [askContent, setAskContent] = useState<string>('');
   const [askDatetime, setAskDatetime] = useState<string>('');
   const [askStatus, setAskStatus] = useState<number>(0); //[-1: 삭제, 0: 문의 접수, 1: 답변완료 상태]
@@ -39,7 +40,6 @@ export default function UserAskList() {
       })
       .then((response) => {
         setAskList(response.data.data);
-        alert("1 : 1 접수를 정상적으로 완료하였습니다.");
       })
       .catch((error) => {
         alert("Failed");
@@ -67,7 +67,11 @@ export default function UserAskList() {
         <Typography align="center" fontSize={"30px"}>
           마이페이지
         </Typography>
-        <Typography align="center" fontSize={"25px"}>
+        <Typography
+          align="center"
+          fontSize={"20px"}
+          style={{ paddingTop: "1vw" }}
+        >
           1 : 1 문의
         </Typography>
       </Box>
@@ -80,12 +84,17 @@ export default function UserAskList() {
           borderRadius: 4,
           borderStyle: "solid",
           margin: "auto",
+          marginTop: "2vw",
         }}
         sx={{ maxWidth: "50vw" }}
       >
         <Card style={{ paddingTop: "1vw" }} sx={{ m: 1, minWidth: "45vw" }}>
           <Box style={{ paddingTop: "1vw" }}>
-            <ButtonGroup variant="outlined" aria-label="outlined button group">
+            <ButtonGroup
+              variant="outlined"
+              aria-label="outlined button group"
+              style={{ paddingLeft: "1vw" }}
+            >
               <Button>전체</Button>
               <Button>1개월</Button>
               <Button>3개월</Button>
@@ -130,7 +139,7 @@ export default function UserAskList() {
                   <Select
                     labelId="demo-simple-select-helper-label"
                     id="demo-simple-select-helper"
-                    // value={orderShipMessage}
+                    // value={askSort}
                     // label="Select gift"
                     // onChange={handleChangeMessage}
                   >
@@ -150,17 +159,24 @@ export default function UserAskList() {
               sx={{ minWidth: "30vw" }}
               // style={{ paddingTop: "1vw" }}
             >
-              <Button fullWidth>조회하기</Button>
+              <Button fullWidth variant="outlined">
+                조회하기
+              </Button>
             </CardActions>
           </Box>
         </Card>
       </Box>
       <Box display={"flex"} justifyContent={"center"}>
-        <CardActions sx={{ minWidth: "30vw" }} style={{ paddingTop: "1vw" }}>
+        <Box
+          sx={{ minWidth: "30vw" }}
+          style={{ paddingTop: "2vw", paddingBottom: "1vw" }}
+        >
           <Link to={"/userAskWrite"}>
-            <Button>문의 작성하기</Button>
+            <Button fullWidth variant="contained">
+              문의 작성하기
+            </Button>
           </Link>
-        </CardActions>
+        </Box>
       </Box>
 
       <Box
@@ -182,14 +198,15 @@ export default function UserAskList() {
                 justifyContent={"space-between"}
                 borderBottom={1}
                 padding={1}
-                margin={1}
+                marginBottom={1}
                 sx={{ minWidth: "60vw" }}
               >
-                <Typography padding={1}>NO.</Typography>
-                <Typography padding={1}>문의 유형</Typography>
-                <Typography padding={1}>문의 내용</Typography>
-                <Typography padding={1}>문의 상태</Typography>
-                <Typography padding={1}>작성일</Typography>
+                <Typography padding={1} flexGrow={1}>NO.</Typography>
+                <Typography padding={1} flexGrow={1}>문의 유형</Typography>
+                <Typography padding={1} flexGrow={7}>문의 제목</Typography>
+                {/* <Typography padding={1} flexGrow={7}>문의 내용</Typography> */}
+                <Typography padding={1} flexGrow={1}>문의 상태</Typography>
+                <Typography padding={1} flexGrow={1}>작성일</Typography>
               </Box>
               {askList.map((ask) => (
                 <Box
@@ -197,13 +214,18 @@ export default function UserAskList() {
                   justifyContent={"space-between"}
                   borderBottom={1}
                   padding={1}
-                  margin={1}
+                  marginBottom={1}
                 >
-                  <Typography padding={1}>{ask.askId}</Typography>
-                  <Typography padding={1}>{ask.askSort}</Typography>
-                  <Typography padding={1}>{ask.askContent}</Typography>
-                  <Typography padding={1}>{ask.askStatus}</Typography>
-                  <Typography padding={1}>{ask.askDatetime}</Typography>
+                  <Typography padding={1} flexGrow={1}>{ask.askId}</Typography>
+                  <Typography padding={1} flexGrow={1}>{ask.askSort}</Typography>
+                  <Typography padding={1} flexGrow={7}>{ask.askTitle}</Typography>
+                  <Typography padding={1} flexGrow={1}>
+                    {ask.askStatus == 0 ? ("문의 접수") : (ask.askStatus == 1 ? ("문의 삭제") : ("답변 완료"))}
+                  </Typography>
+                  <Typography padding={1} flexGrow={1}>{ask.askDatetime}</Typography>
+                  <Link to={`/userAskUpdate/${ask.askId}`}>
+                    <Button>수정</Button>
+                  </Link>
                 </Box>
               ))}
             </CardContent>

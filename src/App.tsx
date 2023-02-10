@@ -26,6 +26,8 @@ import MyPage from "./layouts/MyPage";
 import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import UserAskList from './pages/UserAsk/UserAskList';
 import UserAskWrite from './pages/UserAsk/UserAskWrite';
+import UserAskUpdate from './pages/UserAsk/UserAskUpdate';
+
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
 function App() {
@@ -74,6 +76,7 @@ function App() {
           <Route path="/review" element={<Review />} />
           <Route path="/userAskList" element={<UserAskList />} />
           <Route path="/userAskWrite" element={<UserAskWrite />} />
+          <Route path="/userAskUpdate/:askId" element={<UserAskUpdate />} />
           {/* // component : 마이페이지 화면 */}
           <Route path="/myPage" element={<UserPageLeftSide />}>
             <Route index element={<MyPageOrderInquiry />} />
