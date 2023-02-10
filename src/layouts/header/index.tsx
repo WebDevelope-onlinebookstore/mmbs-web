@@ -8,6 +8,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 import { useUserStore } from "src/stores";
 import { useCookies } from "react-cookie";
+import logo from "./logo.png";
 import axios from "axios";
 
 interface Prop {
@@ -40,28 +41,6 @@ export default function Header() {
         right: false,
     });
 
-
-
-    // const [userName,setUserName] = useState<string>('');
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4080/api/user/`, {
-    //       headers: {
-    //         Authorization: `Bearer ${cookies.token}`,
-    //       },
-    //     })
-    //     .then((response) => {
-    //       const data = response.data;
-    //       const result = data.result;
-    //       console.log(result);
-    //       if (!result) alert(data.message)
-    //       else {
-    //         setUserName(data.data.userName);
-    //       }
-    //     })
-    //   }, []);
-
-      
-
     const toggleDrawer =
         (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
             if (
@@ -76,7 +55,6 @@ export default function Header() {
         };
 
     const { user, remobeUser } = useUserStore();
-    
 
     const [cookies, setCookies] = useCookies();
 
@@ -85,67 +63,70 @@ export default function Header() {
         remobeUser();
     };
 
-    
     const list = () => (
-      <Box
-        sx={{ width: 250 }}
-        pt={4}
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
-        <Box display="flex" justifyContent="center">
-          <TagFacesIcon />
-          <Typography variant="subtitle1" align="center" ml={1} mb={2}>
-            안녕하세요.{" "}
-            <Typography variant="subtitle1" component="span" fontWeight={800}>
-              박준현
-            </Typography>{" "}
-            님
-          </Typography>
+        <Box
+            sx={{ width: 250 }}
+            pt={4}
+            role='presentation'
+            onClick={toggleDrawer(false)}
+            onKeyDown={toggleDrawer(false)}
+        >
+            <Box display='flex' justifyContent='center'>
+                <TagFacesIcon />
+                <Typography variant='subtitle1' align='center' ml={1} mb={2}>
+                    안녕하세요.{" "}
+                    <Typography
+                        variant='subtitle1'
+                        component='span'
+                        fontWeight={800}
+                    >
+                        {user != null && <>{user.userName}</>}
+                    </Typography>{" "}
+                    님
+                </Typography>
+            </Box>
+            <Divider />
+            <Link to={"/myPage"}>
+                <Typography variant='subtitle1' m={2}>
+                    마이 페이지
+                </Typography>
+            </Link>
+            <Link to={"/orderInquiryPage"}>
+                <Typography variant='subtitle1' m={2}>
+                    주문 내역 조회
+                </Typography>
+            </Link>
+            <Link to={"/cart"}>
+                <Typography variant='subtitle1' m={2}>
+                    장바구니
+                </Typography>
+            </Link>
+            <Typography variant='subtitle1' m={2}>
+                리뷰 / 문의
+            </Typography>
+            <Link to={"/userUpdate"}>
+                <Typography variant='subtitle1' m={2}>
+                    회원정보수정
+                </Typography>
+            </Link>
+            <Link to={"/orderPayment"}>
+                <Typography variant='subtitle1' m={2}>
+                    주문 결제 페이지
+                </Typography>
+            </Link>
+            <Link to={"/userAskList"}>
+                <Typography variant='subtitle1' m={2}>
+                    회원 1 : 1 문의
+                </Typography>
+            </Link>
+            <Link to={"/userAskWrite"}>
+                <Typography variant='subtitle1' m={2}>
+                    회원 1 : 1 문의 작성페이지
+                </Typography>
+            </Link>
         </Box>
-        <Divider />
-        <Link to={"/myPage"}>
-          <Typography variant="subtitle1" m={2}>
-            마이 페이지
-          </Typography>
-        </Link>
-        <Link to={"/orderInquiryPage"}>
-          <Typography variant="subtitle1" m={2}>
-            주문 내역 조회
-          </Typography>
-        </Link>
-        <Link to={"/cart"}>
-          <Typography variant="subtitle1" m={2}>
-            장바구니
-          </Typography>
-        </Link>
-        <Typography variant="subtitle1" m={2}>
-          리뷰 / 문의
-        </Typography>
-        <Link to={"/userUpdate"}>
-          <Typography variant="subtitle1" m={2}>
-            회원정보수정
-          </Typography>
-        </Link>
-        <Link to={"/orderPayment"}>
-          <Typography variant="subtitle1" m={2}>
-            주문 결제 페이지
-          </Typography>
-        </Link>
-        <Link to={"/userAskList"}>
-          <Typography variant="subtitle1" m={2}>
-            회원 1 : 1 문의
-          </Typography>
-        </Link>
-        <Link to={"/userAskWrite"}>
-          <Typography variant="subtitle1" m={2}>
-            회원 1 : 1 문의 작성페이지
-          </Typography>
-        </Link>
-      </Box>
     );
-    
+
     return (
         <>
             <Box
@@ -155,39 +136,19 @@ export default function Header() {
                 mr='10vw'
                 p={2}
             >
-                <Box
-                    flex={1}
-                    display='flex'
-                    justifyContent='flex-start'
-                    alignItems='center'
-                >
-                    <Typography ml={2} mr={2}>
-                        추천도서
-                    </Typography>
-                    <Divider
-                        orientation='vertical'
-                        variant='middle'
-                        flexItem
-                        sx={{ borderColor: "#000000" }}
-                    />
-                    <Typography ml={2} mr={2}>
-                        신작
-                    </Typography>
-                    <Divider
-                        orientation='vertical'
-                        variant='middle'
-                        flexItem
-                        sx={{ borderColor: "#000000" }}
-                    />
-                    <Typography ml={2} mr={2}>
-                        이벤트
-                    </Typography>
+                <Box flex={1}>
+                    <Box
+                        component='img'
+                        src={logo}
+                        sx={{ height: "3.3em" }}
+                    ></Box>
                 </Box>
                 <Box
                     flex={1}
                     display='flex'
                     justifyContent='center'
                     alignItems='center'
+                    textAlign='center'
                 >
                     <Link to={""}>
                         <Typography variant='h5'>몽몽 책방</Typography>
@@ -237,13 +198,13 @@ export default function Header() {
                     />
                     {login && (
                         <>
-                            <ShoppingCartOutlinedIcon
+                            {/* <ShoppingCartOutlinedIcon
                                 sx={{
                                     color: grey[900],
                                     marginRight: 2,
                                     marginLeft: 2,
                                 }}
-                            />
+                            /> */}
                             <Divider
                                 orientation='vertical'
                                 variant='middle'
