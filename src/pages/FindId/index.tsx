@@ -9,6 +9,8 @@ export default function FindId() {
     const [userEmail, setEmail] = useState<string>('');
     const {user,setUser} = useUserStore();
 
+   
+
     const findIdHandeler =() => {
         if(userName.length === 0 || userEmail.length ===0){
         alert('닉네임과 이메일을 입력하세요.')
@@ -26,7 +28,8 @@ export default function FindId() {
                 alert('아이디를 찾을 수 없습니다.')
                 return;
             }else{
-                alert( responseData )
+                let moon = response.data.data
+                alert( '일치하는 아이뒤:' + moon )
                 console.log(responseData)
             }
         })
