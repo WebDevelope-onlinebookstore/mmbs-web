@@ -187,7 +187,7 @@ export default function MyPageOrderInquiry() {
                                             </Typography>
                                         </Box>
                                         <Box>
-                                            <Gifts />
+                                            <Gifts orderNumber={order.orderNumber} />
                                         </Box>
                                         <Box>
                                             <form
