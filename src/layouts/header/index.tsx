@@ -63,6 +63,7 @@ export default function Header() {
         remobeUser();
     };
 
+    // if(!cookies.token == null){
     const list = () => (
       <Box
         sx={{ width: 250 }}
@@ -125,8 +126,14 @@ export default function Header() {
             회원 1 : 1 문의 수정페이지
           </Typography>
         </Link>
+        <Link to={"/practice"}>
+          <Typography variant="subtitle1" m={2}>
+            주문내역 조회 최종본
+          </Typography>
+        </Link>
       </Box>
     );
+  // }
 
     return (
         <>
@@ -197,7 +204,7 @@ export default function Header() {
                         flexItem
                         sx={{ borderColor: "#000000" }}
                     />
-                    {login && (
+                    {cookies.token && (
                         <>
                             {/* <ShoppingCartOutlinedIcon
                                 sx={{

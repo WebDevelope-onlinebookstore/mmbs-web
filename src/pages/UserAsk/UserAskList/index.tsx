@@ -46,12 +46,14 @@ export default function UserAskList() {
       });
   }
 
+  
+
   useEffect(() => {
     getAskList();
     axios
       .get(`http://localhost:4080/api/ask/askList`, {
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${cookies.token}`
         },
       })
       .then((response) => {
@@ -60,6 +62,26 @@ export default function UserAskList() {
         setAskList(response.data.data);
       });
   }, []);
+
+  const askDelete = (askId: number) =>{
+        
+    const data = { askId };
+
+    axios
+      .post(`http://localhost:4080/api/ask/userDelete/`, data, {
+        headers: { Authorization: `Bearer ${cookies.token}` },
+      })
+      .then((response) => {
+        const data = response.data;
+        if (data.result) {
+          const list = data.data;
+          setAskList(list);
+        }
+      })
+      .catch((error) => {
+        alert("Failed");
+      });
+  };
 
   return (
     <>
@@ -204,7 +226,6 @@ export default function UserAskList() {
                 <Typography padding={1} flexGrow={1}>NO.</Typography>
                 <Typography padding={1} flexGrow={1}>문의 유형</Typography>
                 <Typography padding={1} flexGrow={7}>문의 제목</Typography>
-                {/* <Typography padding={1} flexGrow={7}>문의 내용</Typography> */}
                 <Typography padding={1} flexGrow={1}>문의 상태</Typography>
                 <Typography padding={1} flexGrow={1}>작성일</Typography>
               </Box>
@@ -225,6 +246,9 @@ export default function UserAskList() {
                   <Typography padding={1} flexGrow={1}>{ask.askDatetime}</Typography>
                   <Link to={`/userAskUpdate/${ask.askId}`}>
                     <Button>수정</Button>
+                  </Link>
+                  <Link to={"/userAskList"}>
+                    <Button onClick={ () => askDelete(ask.askId) }>삭제</Button>
                   </Link>
                 </Box>
               ))}
