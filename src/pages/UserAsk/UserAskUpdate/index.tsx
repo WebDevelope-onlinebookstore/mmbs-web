@@ -193,7 +193,7 @@ export default function UserAskUpdate() {
           <Link to={"/userAskList"}>
             <Button onClick={() => askWriteHandler()}>문의 변경</Button>
           </Link>
-          <Link to={"userAskMain"}>
+          <Link to={"/userAskList"}>
             <Button>취소</Button>
           </Link>
         </CardActions>

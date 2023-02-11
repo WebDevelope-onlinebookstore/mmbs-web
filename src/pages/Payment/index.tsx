@@ -123,7 +123,7 @@ export default function OrderPage() {
 
       setOrderShipAddress(user.userAddress);
       setOrderShipAddressDetail(user.userAddressDetail);
-    }
+    } 
   }, [])
 
   return (

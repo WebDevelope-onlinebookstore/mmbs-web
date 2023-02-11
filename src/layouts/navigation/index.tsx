@@ -43,7 +43,7 @@ export default function Navigation() {
     const id = open ? "simple-popper" : undefined;
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='static' sx={{ backgroundColor: "#004433" }}>
+            <AppBar position='static' sx={{ backgroundColor: "#CC9900" }}>
                 <Toolbar style={{ paddingRight: "10vw", paddingLeft: "10vw" }}>
                     <IconButton
                         size='large'

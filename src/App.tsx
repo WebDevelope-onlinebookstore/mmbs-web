@@ -77,13 +77,15 @@ function App() {
           <Route path="/userAskList" element={<UserAskList />} />
           <Route path="/userAskWrite" element={<UserAskWrite />} />
           <Route path="/userAskUpdate/:askId" element={<UserAskUpdate />} />
+          <Route path="/practice" element={<MyPageOrderInquiry />} />
           {/* // component : 마이페이지 화면 */}
-          <Route path="/myPage" element={<UserPageLeftSide />}>
-            <Route index element={<MyPageOrderInquiry />} />
+          {/* <Route path="/myPage" element={<UserPageLeftSide />}>
+            <Route index element={<MyPageOrderInquiry />} /> */}
             {/* <Route index element={<UserAskList />} />
                 <Route index element={<UserAskWrite />} /> */}
-          </Route>
+          {/* </Route> */}
           <Route path="/search/:productTitle" element={<SearchAdd />} />
+          <Route path="/myPageOrderInquiry" element={<MyPageOrderInquiry />} />
         </Routes>
         {/* // component : ?? 화면 */}
         <Footer />
