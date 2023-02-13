@@ -8,6 +8,7 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import Alert from "@mui/material/Alert";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Ranking() {
   const [value, setValue] = React.useState(0);
@@ -74,7 +75,9 @@ function TabPanel(props: TabPanelProps) {
           {bestList.map((item, index) => (
             <Box display='flex' p={1} borderBottom={1}>
             <Typography flex={1}>{lankList[index]}</Typography>
-            <Typography flex={6}>{item.productTitle}</Typography>
+            <Link to={`/DtlPage/${item.productSeq}`}>
+              <Typography flex={6}>{item.productTitle}</Typography>
+            </Link>
             </Box>
           ))}
         </Box>

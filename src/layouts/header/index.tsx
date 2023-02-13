@@ -60,7 +60,7 @@ export default function Header() {
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        remobeUser();
+        localStorage.remobeUser();
     };
 
     // if(!cookies.token == null){
