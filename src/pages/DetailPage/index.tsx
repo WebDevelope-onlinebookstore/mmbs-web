@@ -158,7 +158,7 @@ export default function DetailPage() {
     }, []);
     return (
         <>
-            <Box display={"flex"} justifyContent={"center"}>
+            <Box display={"flex"} justifyContent={"center"} sx={{ mt :10}}>
                 <Box border={1}>
                     <Box component='img' src={productImageUrl} />
                 </Box>

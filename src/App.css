@@ -19,6 +19,11 @@ li {
   cursor: pointer;
 }
 
+@font-face {
+  font-family: "logoFont";
+  src: url("./assets/fonts/Pak_Yong_jun.otf");
+}
+
 /* 태그에 관련된 공통적 사항은 App.css에 넣는 것이 좋다 */
 
 

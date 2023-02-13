@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import { AGE_LIST, CATEGORY_LIST } from "../../../../constants/navigation";
 import { useNavigate } from "react-router-dom";
+import { borderRadius } from "@mui/system";
 
 interface Props {
     setAnchorEl: (parameter: null | HTMLElement) => void;
@@ -20,7 +21,7 @@ export default function PoperMenuItem({ setAnchorEl }: Props) {
         <Box
             display='flex'
             width={"80vw"}
-            sx={{ border: 1, p: 1, bgcolor: "background.paper" }}
+            sx={{ border: 2, borderColor: "#B3894F", p: 1, bgcolor: "background.paper", borderRadius:2, mt:1}}
         >
             {CATEGORY_LIST.map((category) => (
                 <>
@@ -38,6 +39,7 @@ export default function PoperMenuItem({ setAnchorEl }: Props) {
                             <Typography
                                 pl={2}
                                 mb={1}
+                                mt={2}
                                 variant='subtitle2'
                                 component='div'
                                 onClick={() => menuItemHandler(category.url)}
@@ -47,7 +49,7 @@ export default function PoperMenuItem({ setAnchorEl }: Props) {
                         ))}
                     </Box>
                     <Divider
-                        style={{ borderColor: "#aaaaaa" }}
+                        style={{ borderColor: "#B3894F" }}
                         orientation='vertical'
                         flexItem
                     />
@@ -79,7 +81,7 @@ export default function PoperMenuItem({ setAnchorEl }: Props) {
                     </Box>
                     {age.title !== "4~7세" && (
                         <Divider
-                            style={{ borderColor: "#aaaaaa" }}
+                            style={{ borderColor: "#B3894F" }}
                             orientation='vertical'
                             flexItem
                         />

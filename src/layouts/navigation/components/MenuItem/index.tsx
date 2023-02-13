@@ -45,11 +45,11 @@ export default function MenuComponent({ title, subTitles }: props) {
                 MenuListProps={{
                     "aria-labelledby": "basic-button",
                 }}
-                sx={{ pt: 1.5, pb: 1.5 }}
+                sx={{ pt: 1.5, pb: 1.5, mt: 2 }}
             >
                 {subTitles.map((sub) => (
                     <MenuItem
-                        sx={{ width: "10vw", pt: 1.5, pb: 1.5 }}
+                        sx={{ minwidth: "10vw", pt: 1.5, pb: 1.5 }}
                         onClick={() => menuItemHandler(sub.url)}
                     >
                         {sub.subTitle}

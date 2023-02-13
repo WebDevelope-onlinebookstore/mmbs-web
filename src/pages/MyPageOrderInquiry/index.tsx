@@ -8,11 +8,30 @@ import Gifts from "../Gifts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import OrderList from "../OrderList";
+
+interface props {
+  order: any;
+  detailList: any[];
+  product: any;
+}
+
+// (parameter) category: {
+//   title: string;
+//   url: string;
+//   subTitles: {
+//       subTitle: string;
+//       url: string;
+//   }[];
+// }
+// { order, detailList, product }: props
 
 export default function MyPageOrderInquiry() {
     const [orderList, setOrderList] = useState<any[]>([]);
     const [orderDetailList, setOrderDetailList] = useState<any[]>([]);
-    const [productEntityList, setProductEntityList] = useState<any[]>([]);
+    const [productList, setProductList] = useState<any>();
+
+    const [orderFinalList, setOrderFinalList] = useState<any[]>([]);
     const [cookies, setCookies] = useCookies();
 
     const [orderNumber, setOrderNumber] = useState<number>(100);
@@ -69,7 +88,7 @@ export default function MyPageOrderInquiry() {
             });
     };
 
-    const getOrderDetailList = async () => {
+    const getOrderFinalList = async () => {
       axios
           .get(`http://localhost:4080/api/order/orderInquiryPage/${orderNumber}/${productSeq}`, {
               headers: {
@@ -77,34 +96,51 @@ export default function MyPageOrderInquiry() {
               },
           })
           .then((response) => {
-              setOrderDetailList(response.data.data);
-              // setProductEntityList(response.data.data);
+            const responseData = response.data;
+            console.log(responseData)
+            if(!responseData.result){
+                alert('Error!')
+                return;
+            }
+            const {order, detailList, product} = responseData.data;
+            // setOrderList(order);
+            setOrderDetailList(detailList);
+            setProductList(product);
+            console.log(setProductList);
+            console.log(setOrderDetailList);
           })
           .catch((error) => {
-              alert("Failed");
+              alert("Get Data Failed");
           });
   };
 
+  
+
     useEffect(() => {
         getOrderList();
-        getOrderDetailList();
+        getOrderFinalList();
     }, []);
 
     return (
       <>
-        <Box
-          // sx={{ flexGrow: 1 }}
-          display={"flex"}
-          style={{ padding: "3vw" }}
-        >
+        <Box display={"flex"} style={{ padding: "3vw" }}>
           <UserPageLeftSide />
           <Box marginLeft={"10vw"}>
             <Box>
               <Box>
-                <Typography paddingBottom={"2vw"} textAlign={"center"}>
+                <Typography
+                  variant="h3"
+                  paddingBottom={"2vw"}
+                  textAlign={"center"}
+                  fontFamily={"logoFont"}
+                >
                   마이페이지
                 </Typography>
-                <Typography paddingBottom={"1vw"} textAlign={"center"}>
+                <Typography
+                  variant="h4"
+                  paddingBottom={"1vw"}
+                  textAlign={"center"}
+                >
                   주문 / 배송내역 조회
                 </Typography>
               </Box>
@@ -117,7 +153,7 @@ export default function MyPageOrderInquiry() {
                 justifyContent={"center"}
                 style={{
                   padding: "1vw",
-                  // margin: "auto",
+                  
                 }}
                 sx={{ maxWidth: "60vw" }}
                 borderBottom={1}
@@ -127,10 +163,10 @@ export default function MyPageOrderInquiry() {
                   style={{ paddingTop: "1vw" }}
                   sx={{ m: 1, minWidth: "55vw" }}
                 >
-                  <Box display={"flex"}>
-                    <CardContent>
-                      {orderList.map((order) => (
-                        <>
+                  {orderList.map((order) => (
+                    <>
+                      <Box display={"flex"}>
+                        <CardContent>
                           <Box>
                             <Typography padding={1}>
                               {order.orderNumber}
@@ -187,10 +223,10 @@ export default function MyPageOrderInquiry() {
                               </form>
                             </Box> */}
                           </Box>
-                        </>
-                      ))}
-                    </CardContent>
-                  </Box>
+                        </CardContent>
+                      </Box>
+                    </>
+                  ))}
                 </Card>
               </Box>
             </Box>

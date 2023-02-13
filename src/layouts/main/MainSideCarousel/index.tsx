@@ -5,7 +5,7 @@ import Carousel from "react-material-ui-carousel";
 import Side1 from "../../../assets/images/Group2.png";
 import Side2 from "../../../assets/images/Group3.png";
 import Card from '@mui/material/Card/Card'
-import Typography from '@mui/material/Typography'
+import Typography from "@mui/material/Typography";
 
 export default function MainSideCarousel() {
   const items = [Side1, Side2];
@@ -44,22 +44,35 @@ export default function MainSideCarousel() {
 
 function Item({item}: any) {
   return (
-    <Paper>
-      <Box   height="500px" display={'flex'} justifyContent={'center'} justifyItems={'center'} alignItems={'center'} >
-      {item.map((item: any) => (
-                    <PaperItem item={item} />
-                ))}
-
+    <>
+      <Box>
+        <Typography variant='h5' fontFamily={"logoFont"} textAlign={"center"} sx={{mt:1}} > {'<'} 오늘의 추천 책 {'>'}</Typography>
+        <Box
+          height="500px"
+          display={"flex"}
+          justifyContent={"center"}
+          justifyItems={"center"}
+          alignItems={"center"}
+        >
+          {item.map((item: any) => (
+            <PaperItem item={item} />
+          ))}
+        </Box>
       </Box>
-    </Paper>
+    </>
   );
 }
 function PaperItem({item}: any) {
   return (
       <Card>
-          <Box>
-              <Box width="100%" height="400px" component='img' src={item.productImageUrl}></Box>
-          </Box>
+        <Box>
+          <Box
+            width="100%"
+            height="400px"
+            component="img"
+            src={item.productImageUrl}
+          ></Box>
+        </Box>
       </Card>
-  )
+  );
 }
