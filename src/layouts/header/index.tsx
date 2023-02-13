@@ -60,7 +60,7 @@ export default function Header() {
 
     const logOutHandler = () => {
         setCookies("token", "", { expires: new Date() });
-        remobeUser();
+        localStorage.remobeUser();
     };
 
     // if(!cookies.token == null){
@@ -168,7 +168,7 @@ export default function Header() {
                     justifyContent='flex-end'
                     alignItems='center'
                 >
-                    {user ? (
+                    {cookies.token ? (
                         <Link to={""}>
                             <Typography
                                 variant='subtitle1'
