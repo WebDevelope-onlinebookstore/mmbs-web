@@ -43,8 +43,8 @@ export default function Navigation() {
     const id = open ? "simple-popper" : undefined;
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position='static' sx={{ backgroundColor: "#CC9900" }}>
-                <Toolbar style={{ paddingRight: "10vw", paddingLeft: "10vw" }}>
+            <AppBar position='static' sx={{ backgroundColor: "#F0A500" }}>
+                <Toolbar style={{ paddingRight: "10vw", paddingLeft: "10vw" }} >
                     <IconButton
                         size='large'
                         edge='start'
@@ -55,7 +55,7 @@ export default function Navigation() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Box display='flex' sx={{ flexGrow: 1 }}>
+                    <Box display='flex' sx={{ flexGrow: 1 }} >
                         {CATEGORY_LIST.map((category) => (
                             <MenuComponent
                                 title={category.title}

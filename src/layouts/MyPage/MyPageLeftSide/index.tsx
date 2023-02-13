@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Drawer } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
+
 import { useState, KeyboardEvent, useEffect } from "react";
 
 import { useUserStore } from "src/stores";
@@ -35,16 +37,34 @@ const [selectedIndex, setSelectedIndex] = React.useState(1);
           marginLeft={"5vw"}
           marginTop={"5vw"}
           borderRadius={1}
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "#FFFF99" }}
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "#FFFF66" }}
         >
-          <Box padding={2} borderRadius={1} textAlign={"right"}>
-            <Typography variant="subtitle1" component="span" fontWeight={800}>
+          <Box
+            padding={2}
+            borderRadius={1}
+            textAlign={"right"}
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <PersonIcon
+              sx={{
+                bgcolor: "#FFFF66",
+              }}
+            />
+            <Typography
+              variant="subtitle1"
+              component="span"
+              fontWeight={800}
+              fontSize={20}
+              fontFamily={"logoFont"}
+            >
               {user != null && <>{user.userName}</>} 님
             </Typography>
           </Box>
         </Box>
         <Box
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "#FFFFCC" }}
+          sx={{ width: "100%", maxWidth: 360, bgcolor: "#FFFF99" }}
           marginLeft={"5vw"}
           marginTop={"2vw"}
           marginBottom={"5vw"}
