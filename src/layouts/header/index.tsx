@@ -159,7 +159,7 @@ export default function Header() {
                     textAlign='center'
                 >
                     <Link to={""}>
-                        <Typography variant='h5'>몽몽 책방</Typography>
+                        <Typography variant='h3' fontFamily={"logoFont"}>몽몽 책방</Typography>
                     </Link>
                 </Box>
                 <Box
@@ -168,19 +168,20 @@ export default function Header() {
                     justifyContent='flex-end'
                     alignItems='center'
                 >
-                    {user ? (
+                    {cookies.token ? (
                         <Link to={""}>
                             <Typography
                                 variant='subtitle1'
                                 m={2}
                                 onClick={() => logOutHandler()}
+                                fontFamily={"logoFont"}
                             >
                                 로그아웃
                             </Typography>
                         </Link>
                     ) : (
                         <Link to={"/signIn"}>
-                            <Typography variant='subtitle1' m={2}>
+                            <Typography variant='subtitle1' m={2} fontFamily={"logoFont"}>
                                 로그인
                             </Typography>
                         </Link>
@@ -193,26 +194,12 @@ export default function Header() {
                         sx={{ borderColor: "#000000" }}
                     />
                     <Link to={"/signup"}>
-                        <Typography ml={2} mr={2} component='span'>
+                        <Typography ml={2} mr={2} component='span' fontFamily={"logoFont"}>
                             회원가입
                         </Typography>
                     </Link>
-
-                    <Divider
-                        orientation='vertical'
-                        variant='middle'
-                        flexItem
-                        sx={{ borderColor: "#000000" }}
-                    />
                     {cookies.token && (
                         <>
-                            {/* <ShoppingCartOutlinedIcon
-                                sx={{
-                                    color: grey[900],
-                                    marginRight: 2,
-                                    marginLeft: 2,
-                                }}
-                            /> */}
                             <Divider
                                 orientation='vertical'
                                 variant='middle'
