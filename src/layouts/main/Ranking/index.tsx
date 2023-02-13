@@ -13,9 +13,6 @@ import { Link } from "react-router-dom";
 export default function Ranking() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
   const [bestList, setBestList] = useState<any[]>([]);
 
   useEffect(()=>{
@@ -31,13 +28,20 @@ export default function Ranking() {
   return (
     <Card variant="outlined">
       <Box sx={{ width: "100%" }}>
-        <Box display={'flex'} justifyContent={'center'} sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="basic tabs example"
-          >
-            <Tab color="#000000" label="베스트셀러" {...a11yProps(0)} />
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          sx={{ borderBottom: 1, borderColor: "divider" }}
+        >
+          <Tabs>
+            <Typography
+              fontSize={25}
+              textAlign={"center"}
+              fontFamily={"logoFont"}
+              sx={{ pt:1 }}
+            >
+              베스트 셀러
+            </Typography>
           </Tabs>
         </Box>
         <TabPanel value={value} index={0} bestList={bestList}>

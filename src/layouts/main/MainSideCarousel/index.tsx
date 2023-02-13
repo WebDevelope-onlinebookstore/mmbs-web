@@ -45,15 +45,22 @@ export default function MainSideCarousel() {
 
 function Item({item}: any) {
   return (
-    <Paper>
-      <Box   height="500px" display={'flex'} justifyContent={'center'} justifyItems={'center'} alignItems={'center'} >
-      {item.map((item: any) => (
-
-                    <PaperItem item={item} />
-                ))}
-
+    <>
+      <Box>
+        <Typography variant='h5' fontFamily={"logoFont"} textAlign={"center"} sx={{mt:1}} > {'<'} 오늘의 추천 책 {'>'}</Typography>
+        <Box
+          height="500px"
+          display={"flex"}
+          justifyContent={"center"}
+          justifyItems={"center"}
+          alignItems={"center"}
+        >
+          {item.map((item: any) => (
+            <PaperItem item={item} />
+          ))}
+        </Box>
       </Box>
-    </Paper>
+    </>
   );
 }
 function PaperItem({item}: any) {
@@ -62,10 +69,16 @@ function PaperItem({item}: any) {
       <Card>
         <Link to={`/DtlPage/${item.productSeq}`}>
           <Box>
-              <Box width="100%" height="400px" component='img' src={item.productImageUrl}></Box>
+              <Box
+                width="100%"
+                height="400px"
+                component="img"
+                src={item.productImageUrl}
+              ></Box>
           </Box>
-
         </Link>
       </Card>
-  )
+      
+      
+  );
 }

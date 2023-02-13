@@ -60,10 +60,10 @@ export default function MainArticle() {
   return (
       <Box mb={2} ml='10vw' mr='10vw'>
         <Grid mt={2} container spacing={2}>
-          <Grid item xs={10}>
+          <Grid item xs={8}>
             <MainSideCarousel />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={4}>
             <Ranking></Ranking>
           </Grid>
         </Grid>
