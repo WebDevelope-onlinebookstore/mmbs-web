@@ -27,11 +27,15 @@ import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import UserAskList from './pages/UserAsk/UserAskList';
 import UserAskWrite from './pages/UserAsk/UserAskWrite';
 import UserAskUpdate from './pages/UserAsk/UserAskUpdate';
+import { useUserStore } from "./stores";
+import { useCookies } from "react-cookie";
 
 // component : Main Component //+
 // descriptiong : 전체 루트 컴포넌트 //
 function App() {
     const [connection, setConnection] = useState<string>("");
+    const { user, setUser } = useUserStore();
+    const [ cookies, setCookies ] = useCookies();
     const connectionTest = () => {
         axios
             .get("http://localhost:4080/")
@@ -46,6 +50,23 @@ function App() {
         connectionTest();
     }, []);
     const [tmp, setTmp] = useState<number>(0);
+
+    useEffect(() => {
+      if (cookies.token && !user) {
+        axios('http://localhost:4080/api/user/', { headers: { Authorization: `Bearer ${cookies.token}` } }).then((response) => {
+          const responseData = response.data.data;
+          setUser(responseData);
+        }).catch((error) => {
+          setCookies('token', new Date());
+        })
+      }
+      if (!cookies.token && user) {
+        setUser(null);
+      }
+      // 닫아주는건데 이값을 받고 닫아주는건가?
+      // 계속 안돌게하기 위해 닫아주는거 
+    }, [cookies.token, user])
+
     return (
       <>
         <Header />

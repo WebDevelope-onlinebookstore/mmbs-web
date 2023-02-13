@@ -29,6 +29,7 @@ export default function UserAskList() {
   const [askDatetime, setAskDatetime] = useState<number>(0);
   const [askStatus, setAskStatus] = useState<string>(''); // 문의 삭제, 문의 접수, 답변완료 상태]
   const [askReply, setAskReply] = useState<string>('');
+  
 
   const handleChangeAskSort = (event: SelectChangeEvent) => {
     setAskSort(event.target.value as string);

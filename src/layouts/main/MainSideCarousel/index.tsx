@@ -5,7 +5,8 @@ import Carousel from "react-material-ui-carousel";
 import Side1 from "../../../assets/images/Group2.png";
 import Side2 from "../../../assets/images/Group3.png";
 import Card from '@mui/material/Card/Card'
-import Typography from "@mui/material/Typography";
+import Typography from '@mui/material/Typography'
+import { Link } from "react-router-dom";
 
 export default function MainSideCarousel() {
   const items = [Side1, Side2];
@@ -64,15 +65,20 @@ function Item({item}: any) {
 }
 function PaperItem({item}: any) {
   return (
+    
       <Card>
-        <Box>
-          <Box
-            width="100%"
-            height="400px"
-            component="img"
-            src={item.productImageUrl}
-          ></Box>
-        </Box>
+        <Link to={`/DtlPage/${item.productSeq}`}>
+          <Box>
+              <Box
+                width="100%"
+                height="400px"
+                component="img"
+                src={item.productImageUrl}
+              ></Box>
+          </Box>
+        </Link>
       </Card>
+      
+      
   );
 }

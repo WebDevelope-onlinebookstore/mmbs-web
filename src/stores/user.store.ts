@@ -3,7 +3,6 @@ interface UserStore{
     user:any;
     setUser:(user: any) => void;
     remobeUser:()=>void;
-
 }
 const useStore = create<UserStore>((set)=>({
     user: null,
