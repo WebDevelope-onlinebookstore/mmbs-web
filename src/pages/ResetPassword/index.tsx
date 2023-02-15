@@ -7,7 +7,7 @@ export default function ResetPassword() {
     const [userPassword, setPassword] = useState<string>('');
     const [userPassword2, setPassword2] = useState<string>('');
     
-    const {user,setUser} = useUserStore();
+    const { user, setUser } = useUserStore();
     const {userFindId} = useFindIdStore();
 
     const resetPasswordHandeler =() => {

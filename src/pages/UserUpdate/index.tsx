@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 
-import { styled, alpha } from "@mui/material/styles";
 import {Card, CardContent,TextField , CardActions ,Button ,Box , Typography} from '@mui/material';
 import axios from 'axios';
 import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
@@ -8,7 +7,6 @@ import { useCookies } from "react-cookie";
 
 export default function UserUpdate() {
 
-  const [user, setUser] = useState<any>(null);
   const [userId, setUserId] = useState<string>('');
   const [userPassword, setUserPassword] = useState<string>('');
   const [userPasswordCheck, setUserPasswordCheck] = useState<string>('');
@@ -87,7 +85,11 @@ export default function UserUpdate() {
   return (
     <Box display={"flex"}>
       <UserPageLeftSide />
-      <Box display={"flex"} justifyContent={"center"} style={{paddingTop: "5vw"}}>
+      <Box
+        display={"flex"}
+        justifyContent={"center"}
+        style={{ paddingTop: "5vw" }}
+      >
         <Card sx={{ minWidth: 275, maxWidth: "40vw" }}>
           <CardContent>
             <Typography fontWeight={800} ml={1} mb={2}>
@@ -97,7 +99,6 @@ export default function UserUpdate() {
               fullWidth
               label="아이디"
               value={userId}
-              // onChange={(e) => setUserId(e.target.value)}
               type="email"
               variant="standard"
             />
@@ -122,7 +123,6 @@ export default function UserUpdate() {
               label="이메일"
               type="email"
               value={userEmail}
-              // onChange={(e) => setUserEmail(e.target.value)} 있어야 입력 가능
               variant="standard"
             />
             <TextField

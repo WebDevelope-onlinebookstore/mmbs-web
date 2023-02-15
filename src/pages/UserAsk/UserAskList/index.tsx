@@ -1,36 +1,35 @@
 import React from 'react'
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie"; 
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from "axios";
 
 import {Card, CardContent,TextField, CardActions, Button, Box, Typography, ButtonGroup, Stack } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { useNavigate } from 'react-router-dom';
-
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie"; 
-import { Link } from 'react-router-dom';
-import axios from "axios";
 
 import UserPageLeftSide from "src/layouts/MyPage/MyPageLeftSide";
 
 export default function UserAskList() {
+
   const navigator = useNavigate();
 
   const [cookies, setCookies] = useCookies();
 
   const [askList, setAskList] = useState<any[]>([]);
 
-  const [askId, setAskId] = useState<number>(0);
-  const [askWriter, setAskWriter] = useState<string>('');
+  // const [askId, setAskId] = useState<number>(0);
+  // const [askWriter, setAskWriter] = useState<string>('');
   const [askSort, setAskSort] = useState<string>('');
-  const [askTitle, setAskTitle] = useState<string>('');
-  const [askContent, setAskContent] = useState<string>('');
+  // const [askTitle, setAskTitle] = useState<string>('');
+  // const [askContent, setAskContent] = useState<string>('');
   const [askDatetime, setAskDatetime] = useState<number>(0);
-  const [askStatus, setAskStatus] = useState<string>(''); // 문의 삭제, 문의 접수, 답변완료 상태]
-  const [askReply, setAskReply] = useState<string>('');
+  const [askStatus, setAskStatus] = useState<string>('');
+  // const [askReply, setAskReply] = useState<string>('');
   
-
   const handleChangeAskSort = (event: SelectChangeEvent) => {
     setAskSort(event.target.value as string);
   };
@@ -167,10 +166,18 @@ export default function UserAskList() {
                     aria-label="outlined button group"
                     style={{ paddingLeft: "1vw" }}
                   >
-                    <Button onClick={() => onAskDateTimeHandler(0)}>전체</Button>
-                    <Button onClick={() => onAskDateTimeHandler(1)}>1개월</Button>
-                    <Button onClick={() => onAskDateTimeHandler(3)}>3개월</Button>
-                    <Button onClick={() => onAskDateTimeHandler(6)}>6개월</Button>
+                    <Button onClick={() => onAskDateTimeHandler(0)}>
+                      전체
+                    </Button>
+                    <Button onClick={() => onAskDateTimeHandler(1)}>
+                      1개월
+                    </Button>
+                    <Button onClick={() => onAskDateTimeHandler(3)}>
+                      3개월
+                    </Button>
+                    <Button onClick={() => onAskDateTimeHandler(6)}>
+                      6개월
+                    </Button>
                   </ButtonGroup>
                   {/* <Stack spacing={3}>
               <LocalizationProvider
@@ -208,8 +215,8 @@ export default function UserAskList() {
                           <MenuItem>
                             <em>답변상태</em>
                           </MenuItem>
-                          <MenuItem value={'답변 완료'}>답변 완료</MenuItem>
-                          <MenuItem value={'문의 접수'}>문의 접수</MenuItem>
+                          <MenuItem value={"답변 완료"}>답변 완료</MenuItem>
+                          <MenuItem value={"문의 접수"}>문의 접수</MenuItem>
                         </Select>
                       </FormControl>
                     </CardContent>
@@ -228,9 +235,13 @@ export default function UserAskList() {
                           <MenuItem>
                             <em>문의 종류</em>
                           </MenuItem>
-                          <MenuItem value={'제품 문의'}>제품 문의</MenuItem>
-                          <MenuItem value={'주문/결제 문의'}>주문/결제 문의</MenuItem>
-                          <MenuItem value={'교환/취소 문의'}>교환/취소 문의</MenuItem>
+                          <MenuItem value={"제품 문의"}>제품 문의</MenuItem>
+                          <MenuItem value={"주문/결제 문의"}>
+                            주문/결제 문의
+                          </MenuItem>
+                          <MenuItem value={"교환/취소 문의"}>
+                            교환/취소 문의
+                          </MenuItem>
                         </Select>
                       </FormControl>
                     </CardContent>
@@ -241,7 +252,11 @@ export default function UserAskList() {
                     sx={{ minWidth: "30vw" }}
                     // style={{ paddingTop: "1vw" }}
                   >
-                    <Button fullWidth variant="outlined" onClick={() => askSearch()}>
+                    <Button
+                      fullWidth
+                      variant="outlined"
+                      onClick={() => askSearch()}
+                    >
                       조회하기
                     </Button>
                   </CardActions>
@@ -320,7 +335,7 @@ export default function UserAskList() {
                           {ask.askTitle}
                         </Typography>
                         <Typography padding={1} flexGrow={1}>
-                        {ask.askStatus}
+                          {ask.askStatus}
                         </Typography>
                         <Typography padding={1} flexGrow={1}>
                           {ask.askDatetime}

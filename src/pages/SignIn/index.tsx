@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import {Card, CardContent,TextField, CardActions, Button, Box, Typography} from '@mui/material';
-import { sign } from 'crypto';
 import axios from 'axios';
-import { error } from 'console';
 import { Cookies, useCookies } from 'react-cookie';
 import { useUserStore } from '../../stores';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+
+import {Card, CardContent,TextField, CardActions, Button, Box, Typography} from '@mui/material';
 
 export default function SingIn() {
   
@@ -16,16 +15,14 @@ export default function SingIn() {
     const navigator = useNavigate();
     const {user, setUser} = useUserStore();
 
-
-    
     const signInHandeler =() => {
         if(userId.length === 0 || userPassword.length ===0){
         alert('아이디와 비밀번호를 입력하세요.')
         return;
         }
         const data ={
-            userId,
-            userPassword
+          userId,
+          userPassword
         }
 
         axios.post("http://localhost:4080/api/auth/signIn", data)
@@ -33,8 +30,8 @@ export default function SingIn() {
             const responseData = response.data;
             console.log(responseData)
             if(!responseData.result){
-                alert('로그인에 실패했습니다')
-                return;
+              alert("로그인에 실패했습니다");
+              return;
             }
             const {token, exprTime, user} = responseData.data;
             const expires = new Date();
@@ -47,9 +44,15 @@ export default function SingIn() {
             alert('로그인에 실패했습니다')
         });
     }
+
   return (
     <>
-      <Typography variant="h3" paddingTop={"2vw"} textAlign={"center"} fontFamily={"logoFont"}>
+      <Typography
+        variant="h3"
+        paddingTop={"2vw"}
+        textAlign={"center"}
+        fontFamily={"logoFont"}
+      >
         로그인
       </Typography>
       <Box

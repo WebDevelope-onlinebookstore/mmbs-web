@@ -131,6 +131,11 @@ export default function Header() {
             주문내역 조회 최종본
           </Typography>
         </Link>
+        <Link to={"/withdraw"}>
+          <Typography variant="subtitle1" m={2}>
+            회원 탈퇴
+          </Typography>
+        </Link>
       </Box>
     );
   // }

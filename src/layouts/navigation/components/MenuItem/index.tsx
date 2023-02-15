@@ -33,6 +33,8 @@ export default function MenuComponent({ title, subTitles }: props) {
             <Typography
                 textAlign='center'
                 variant='subtitle1'
+                fontFamily={"logoFont"}
+                fontSize={20}
                 onClick={handleClick}
             >
                 {title}

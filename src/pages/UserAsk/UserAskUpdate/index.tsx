@@ -1,18 +1,17 @@
 import React from 'react'
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie"; 
+import { Link, useParams } from 'react-router-dom';
+import axios from "axios";
 
 import {Card, CardContent,TextField, CardActions, Button, Box, Typography, ButtonGroup } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie"; 
-import axios from "axios";
-import { Link, useParams } from 'react-router-dom';
-import { useUserStore } from 'src/stores';
-
 export default function UserAskUpdate() {
+
   const { askId } = useParams();
 
   const [cookies, setCookies] = useCookies();
@@ -23,9 +22,9 @@ export default function UserAskUpdate() {
   const [askTitle, setAskTitle] = useState<string>('');
   const [askContent, setAskContent] = useState<string>('');
 
-  const [userName, setUserName] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userPhone, setUserPhone] = useState<string>('');
+  // const [userName, setUserName] = useState<string>('');
+  // const [userEmail, setUserEmail] = useState<string>('');
+  // const [userPhone, setUserPhone] = useState<string>('');
 
   const handleChangeAskSort = (event: SelectChangeEvent) => {
     setAskSort(event.target.value as string);

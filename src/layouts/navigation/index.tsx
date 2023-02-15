@@ -55,7 +55,7 @@ export default function Navigation() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Box display='flex' sx={{ flexGrow: 1 }} >
+                    <Box display='flex' sx={{ flexGrow: 1 }} fontFamily={"logoFont"}>
                         {CATEGORY_LIST.map((category) => (
                             <MenuComponent
                                 title={category.title}
