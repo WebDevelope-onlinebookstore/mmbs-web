@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import { Routes, Route, Outlet, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import Header from "./layouts/header";
 import Main from "./layouts/main";
@@ -16,17 +16,15 @@ import 국내도서 from "./pages/bookList/category/국내도서";
 import OrderPage from "./pages/Payment";
 import FindId from "./pages/FindId";
 import Cart from "./pages/Cart";
-import OrderList from "./pages/OrderList";
-import Gifts from "./pages/Gifts";
 import FindPassword from "./pages/FindPassword/idex";
 import SearchAdd from "./pages/Search";
 import Review from "./pages/Review"
 import ResetPassword from "./pages/ResetPassword"
-import MyPage from "./layouts/MyPage";
-import UserPageLeftSide from 'src/layouts/MyPage/MyPageLeftSide';
 import UserAskList from './pages/UserAsk/UserAskList';
 import UserAskWrite from './pages/UserAsk/UserAskWrite';
 import UserAskUpdate from './pages/UserAsk/UserAskUpdate';
+import Withdraw from './pages/Withdraw';
+
 import { useUserStore } from "./stores";
 import { useCookies } from "react-cookie";
 
@@ -49,7 +47,6 @@ function App() {
     useEffect(() => {
         connectionTest();
     }, []);
-    const [tmp, setTmp] = useState<number>(0);
 
     useEffect(() => {
       if (cookies.token && !user) {
@@ -63,52 +60,54 @@ function App() {
       if (!cookies.token && user) {
         setUser(null);
       }
-      // 닫아주는건데 이값을 받고 닫아주는건가?
-      // 계속 안돌게하기 위해 닫아주는거 
     }, [cookies.token, user])
 
     return (
       <>
         <Header />
         <Navigation />
+        
         <Routes>
           {/* // component : Main 화면 */}
           <Route path="/" element={<Main />} />
           {/* // component : 회원가입 화면 */}
-          <Route path="/dtlpage/:productSeq" element={<DtlPage />} />
           <Route path="/signIn" element={<SignIn />} />
           {/* // component : 로그인 화면 */}
           <Route path="/signup" element={<SignUp />} />
           {/* // component : 마이페이지 화면 */}
+
           {/* // component : 회원정보수정 화면 */}
           <Route path="/userUpdate" element={<UserUpdate />} />
+          {/* // component : 회원 문의 화면 */}
+          <Route path="/userAskList" element={<UserAskList />} />
+          <Route path="/userAskWrite" element={<UserAskWrite />} />
+          <Route path="/userAskUpdate/:askId" element={<UserAskUpdate />} />
+          {/* // component : 회원 리뷰 화면 */}
+          <Route path="/review" element={<Review />} />
+          {/* // component : 회원 주문 조회 화면 */}
+          <Route path="/practice" element={<MyPageOrderInquiry />} />
+          {/* <Route path="/myPageOrderInquiry" element={<MyPageOrderInquiry />} /> */}
+          {/* // component : 회원 탈퇴 화면 */}
+          <Route path="/withdraw" element={<Withdraw />} />
           {/* // component : 도서 목록 화면 */}
           <Route
             path="/bookList/:productGenre/:productSubGenre"
             element={<국내도서 />}
           />
+          <Route path="/dtlpage/:productSeq" element={<DtlPage />} />
           {/* // component : 주문 결제 화면 */}
           <Route path="/orderPayment" element={<OrderPage />} />
-          <Route path="/orderList" element={<OrderList />} />
+          {/* // component : 장바구니 화면 */}
           <Route path="/cart" element={<Cart />} />
+          {/* // component : 아이디/비밀번호 찾기/비밀번호 초기화 화면 */}
           <Route path="/findId" element={<FindId />} />
           <Route path="/findPassword" element={<FindPassword />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="/review" element={<Review />} />
-          <Route path="/userAskList" element={<UserAskList />} />
-          <Route path="/userAskWrite" element={<UserAskWrite />} />
-          <Route path="/userAskUpdate/:askId" element={<UserAskUpdate />} />
-          <Route path="/practice" element={<MyPageOrderInquiry />} />
-          {/* // component : 마이페이지 화면 */}
-          {/* <Route path="/myPage" element={<UserPageLeftSide />}>
-            <Route index element={<MyPageOrderInquiry />} /> */}
-            {/* <Route index element={<UserAskList />} />
-                <Route index element={<UserAskWrite />} /> */}
-          {/* </Route> */}
+
+          {/* // component : 검색 결과 화면 */}
           <Route path="/search/:productTitle" element={<SearchAdd />} />
-          <Route path="/myPageOrderInquiry" element={<MyPageOrderInquiry />} />
         </Routes>
-        {/* // component : ?? 화면 */}
+
         <Footer />
       </>
     );

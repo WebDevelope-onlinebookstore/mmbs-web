@@ -5,13 +5,13 @@ interface SelectProductStore{
     removeSelectProduct:()=> void;
 
 }
-const useStore = create<SelectProductStore>((set)=>({
+const useStore = create<SelectProductStore>((set) => ({
   selectProduct: [],
-  setSelectProduct:(selectProduct: any[])=> {
-        set((state)=>({...state, selectProduct }));
-    },
-    removeSelectProduct:() =>{
-        set((state)=>({...state, selectProduct: []}));
-    }
+  setSelectProduct: (selectProduct: any[]) => {
+    set((state) => ({ ...state, selectProduct }));
+  },
+  removeSelectProduct: () => {
+    set((state) => ({ ...state, selectProduct: [] }));
+  },
 }));
 export default useStore;

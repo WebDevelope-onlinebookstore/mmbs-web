@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {Card, CardContent,TextField, CardActions, Button, Box, Typography} from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
@@ -24,31 +23,29 @@ export default function OrderPage() {
 
   const [cookies, setCookies] = useCookies();
 
-  const { productSeq } = useParams();
-
-  const [orderNumber, setOrderNumber] = useState<string>('');
-  const [orderUserWhether, setOrderUserWhether] = useState<string>('');
+  // const [orderNumber, setOrderNumber] = useState<string>('');
+  // const [orderUserWhether, setOrderUserWhether] = useState<string>('');
   const [orderGuestPassword, setOrderGuestPassword] = useState<string>('');
   const [orderGuestPasswordCheck, setOrderGuestPasswordCheck] = useState<string>('');
-  const [orderUserId, setOrderUserId] = useState<string>('');
+  // const [orderUserId, setOrderUserId] = useState<string>('');
   const [orderGiftCode, setOrderGiftCode] = useState<string>('');
   const [orderUserPhone, setOrderUserPhone] = useState<string>('');
   const [orderUserName, setOrderUserName] = useState<string>('');
   const [orderUserNameA, setOrderUserNameA] = useState<string>('');
   const [orderUserEmail, setOrderUserEmail] = useState<string>('');
-  const [orderDatetime, setOrderDatetime] = useState<string>('');
+  // const [orderDatetime, setOrderDatetime] = useState<string>('');
   const [orderRecieptName, setOrderRecieptName] = useState<string>('');
   const [orderRecieptPhone, setOrderRecieptPhone] = useState<string>('');
   const [orderShipAddress, setOrderShipAddress] = useState<string>('');
   const [orderShipAddressDetail, setOrderShipAddressDetail] = useState<string>('');
-  const [orderTotalPrice, setOrderTotalPrice] = useState<number>(0);
-  const [orderStatus, setOrderStatus] = useState<Number>(0);
-  const [orderShipCompany, setOrderShipCompany] = useState<string>('');
-  const [orderShipNumber, setOrderShipNumber] = useState<number>(0);
+  // const [orderTotalPrice, setOrderTotalPrice] = useState<number>(0);
+  // const [orderStatus, setOrderStatus] = useState<Number>(0);
+  // const [orderShipCompany, setOrderShipCompany] = useState<string>('');
+  // const [orderShipNumber, setOrderShipNumber] = useState<number>(0);
   const [orderShipMessage, setOrderShipMessage] = useState('');
 
-  const [productCount, setProductCount] = useState<number>(0);
-  const [productId, setProductId] = useState<number>(0);
+  // const [productCount, setProductCount] = useState<number>(0);
+  // const [productId, setProductId] = useState<number>(0);
 
   const { user } = useUserStore();
   const { selectProduct } = useSelectProductStore();
@@ -62,16 +59,16 @@ export default function OrderPage() {
     setOrderGiftCode(event.target.value as string);
   };
 
-  const getSelectProduct = () => {
-    axios
-        .get(
-          "http://localhost:4080/api/pay/orderInsert"
-        )
-        .then((response) => {
-            setSelectProduct(response.data.data);
-        })
-        .catch((error) => {});
-};
+//   const getSelectProduct = () => {
+//     axios
+//         .get(
+//           "http://localhost:4080/api/pay/orderInsert"
+//         )
+//         .then((response) => {
+//             setSelectProduct(response.data.data);
+//         })
+//         .catch((error) => {});
+// };
 
   const paymentFinishHandler = async () => {
 
@@ -269,9 +266,6 @@ export default function OrderPage() {
                     </Select>
                   </FormControl>
                 )}
-                {/* { cookies.token && (
-                
-                )} */}
               </CardContent>
             </Card>
           </Box>

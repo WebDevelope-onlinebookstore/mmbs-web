@@ -8,23 +8,11 @@ import Gifts from "../Gifts";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import OrderList from "../OrderList";
 
 interface props {
   order: any;
-  detailList: any[];
-  product: any;
+  orderDetailList: any;
 }
-
-// (parameter) category: {
-//   title: string;
-//   url: string;
-//   subTitles: {
-//       subTitle: string;
-//       url: string;
-//   }[];
-// }
-// { order, detailList, product }: props
 
 export default function MyPageOrderInquiry() {
     const [orderList, setOrderList] = useState<any[]>([]);
@@ -54,8 +42,6 @@ export default function MyPageOrderInquiry() {
     const [productId, setProductId] = useState<string>("");
     const [productPrice, setProductPrice] = useState<number>(0);
     const [orderCount, setOrderCount] = useState<number>(0);
-    
-    const [productSeq, setProductSeq] = useState<number>(0);
 
     const checkDelivery = () => {
         // http://info.sweettracker.co.kr/tracking/5
@@ -88,37 +74,8 @@ export default function MyPageOrderInquiry() {
             });
     };
 
-    const getOrderFinalList = async () => {
-      axios
-          .get(`http://localhost:4080/api/order/orderInquiryPage/${orderNumber}/${productSeq}`, {
-              headers: {
-                  Authorization: `Bearer ${cookies.token}`,
-              },
-          })
-          .then((response) => {
-            const responseData = response.data;
-            console.log(responseData)
-            if(!responseData.result){
-                alert('Error!')
-                return;
-            }
-            const {order, detailList, product} = responseData.data;
-            // setOrderList(order);
-            setOrderDetailList(detailList);
-            setProductList(product);
-            console.log(setProductList);
-            console.log(setOrderDetailList);
-          })
-          .catch((error) => {
-              alert("Get Data Failed");
-          });
-  };
-
-  
-
     useEffect(() => {
         getOrderList();
-        getOrderFinalList();
     }, []);
 
     return (
@@ -153,7 +110,6 @@ export default function MyPageOrderInquiry() {
                 justifyContent={"center"}
                 style={{
                   padding: "1vw",
-                  
                 }}
                 sx={{ maxWidth: "60vw" }}
                 borderBottom={1}
@@ -165,39 +121,52 @@ export default function MyPageOrderInquiry() {
                 >
                   {orderList.map((order) => (
                     <>
-                      <Box display={"flex"}>
-                        <CardContent>
-                          <Box>
-                            <Typography padding={1}>
-                              {order.orderNumber}
-                            </Typography>
-                            <Box
-                              display={"flex"}
-                              justifyContent={"space-between"}
-                              borderBottom={1}
-                              padding={1}
-                              marginBottom={1}
-                            >
-                              <Typography padding={1} flexGrow={1}>
-                                <Box component="img" />
-                              </Typography>
-                              <Box flexGrow={7} padding={1}>
-                                <Typography>책 이름</Typography>
-                                <Typography>{order.orderStatus}</Typography>
-                                <Typography>주문수량</Typography>
-                                <Typography>{order.orderDatetime}</Typography>
-                              </Box>
-                              <Box display={"flex"} flexGrow={1} padding={1}>
-                                <Typography>{order.orderTotalPrice}</Typography>
-                                <Typography>
-                                  {order.orderShipCompany}
-                                </Typography>
-                              </Box>
-                            </Box>
+                      {order.orderDetailList.map((orderDetailList: any) => (
+                        <Box display={"flex"}>
+                          <CardContent>
                             <Box>
-                              <Gifts orderNumber={order.orderNumber} />
-                            </Box>
-                            {/* <Box>
+                              <Typography padding={1}>
+                                {order.order.orderNumber}
+                              </Typography>
+                              <Box
+                                display={"flex"}
+                                justifyContent={"space-between"}
+                                borderBottom={1}
+                                padding={1}
+                                marginBottom={1}
+                              >
+                                <Typography padding={1} flexGrow={1}>
+                                  <Box
+                                    component="img"
+                                    src={orderDetailList.productImageUrl}
+                                    sx={{ width: "8vw", height: "8vw" }}
+                                  />
+                                </Typography>
+                                <Box flexGrow={7} padding={1}>
+                                  <Typography>
+                                    {orderDetailList.productTitle}
+                                  </Typography>
+                                  <Typography>
+                                    {order.order.orderStatus == 0 ? "주문 접수" : "배송 완료"} 
+                                  </Typography>
+                                  <Typography>{orderDetailList.productPrice}</Typography>
+                                  <Typography>
+                                    {order.order.orderDatetime}
+                                  </Typography>
+                                </Box>
+                                <Box display={"flex"} flexGrow={1} padding={1}>
+                                  <Typography>
+                                    {order.order.orderTotalPrice}
+                                  </Typography>
+                                  <Typography>
+                                    {order.order.orderShipCompany}
+                                  </Typography>
+                                </Box>
+                              </Box>
+                              <Box>
+                                <Gifts orderNumber={order.order.orderNumber} />
+                              </Box>
+                              {/* <Box>
                               <form
                                 action="http://info.sweettracker.co.kr/tracking/5"
                                 method="post"
@@ -222,9 +191,10 @@ export default function MyPageOrderInquiry() {
                                 />
                               </form>
                             </Box> */}
-                          </Box>
-                        </CardContent>
-                      </Box>
+                            </Box>
+                          </CardContent>
+                        </Box>
+                      ))}
                     </>
                   ))}
                 </Card>

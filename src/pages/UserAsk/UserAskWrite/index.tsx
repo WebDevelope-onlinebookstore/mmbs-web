@@ -130,8 +130,12 @@ export default function UserAskWrite() {
                           <em>문의 유형을 선택해주세요</em>
                         </MenuItem>
                         <MenuItem value={"제품 문의"}>제품 문의</MenuItem>
-                        <MenuItem value={"주문 / 결제 문의"}>주문 / 결제 문의</MenuItem>
-                        <MenuItem value={"취소 / 환불 문의"}>취소 / 환불 문의</MenuItem>
+                        <MenuItem value={"주문 / 결제 문의"}>
+                          주문 / 결제 문의
+                        </MenuItem>
+                        <MenuItem value={"취소 / 환불 문의"}>
+                          취소 / 환불 문의
+                        </MenuItem>
                       </Select>
                     </FormControl>
                   </Box>
